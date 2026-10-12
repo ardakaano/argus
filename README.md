@@ -40,7 +40,7 @@ Then copy the inner `argus/` folder (the skill) to your agent's skills directory
 | ChatGPT | `make zip`, then sidebar **Plugins > Skills > Create > Upload from your computer**; invoke with `@argus` (plan and workspace permitting) |
 | Claude.ai | `make zip`, then **Customize > Skills > "+" > Create skill > Upload a skill**, and toggle it on (needs "Code execution and file creation" enabled) |
 
-Project-scoped locations and ChatGPT notes are in [`argus/references/platforms.md`](argus/references/platforms.md).
+**Step-by-step for every platform** (install, check it loaded, first prompt, update, remove, troubleshooting, and a 30-second test): [HOWTO.md](HOWTO.md) · [Türkçe](HOWTO.tr.md). Project-scoped locations are in [`argus/references/platforms.md`](argus/references/platforms.md).
 
 ## Use
 
@@ -95,7 +95,7 @@ argus/                        ← repo
 ## Develop
 
 ```bash
-make test       # 64 tests, stdlib only
+make test       # 66 tests, stdlib only
 make examples   # regenerate rendered examples (a test checks they are in sync)
 ```
 

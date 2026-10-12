@@ -44,7 +44,7 @@ mkdir -p ~/.claude/skills && cp -R argus ~/.claude/skills/
 mkdir -p ~/.agents/skills && cp -R argus ~/.agents/skills/
 ```
 
-Diğer ajanlar ve proje kapsamlı konumlar: [`argus/references/platforms.md`](argus/references/platforms.md).
+**Her platform için adım adım anlatım** (kurulum, yüklendiğini doğrulama, ilk prompt, güncelleme, kaldırma, sorun giderme, 30 saniyelik test): [HOWTO.tr.md](HOWTO.tr.md) · [English](HOWTO.md). Proje kapsamlı konumlar: [`argus/references/platforms.md`](argus/references/platforms.md).
 
 ## Kullanım
 
@@ -78,7 +78,7 @@ Türkçe örnekler (ürün kurgusaldır): [`example-report.tr.html`](argus/examp
 ## Geliştirme
 
 ```bash
-make test       # 64 test
+make test       # 66 test
 make examples   # örnek raporları yeniden üret
 make zip        # Claude.ai için argus-skill.zip
 ```

@@ -509,6 +509,21 @@ class SkillMetadataTests(unittest.TestCase):
         description = next(l for l in front.splitlines() if l.startswith('description:'))
         self.assertLessEqual(len(description) - len('description: '), 1024)
 
+    def test_frontmatter_is_portable(self):
+        # claude.ai uploads and the Skills API reject frontmatter keys outside the Agent Skills spec.
+        text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
+        self.assertTrue(text.startswith('---\n'), 'frontmatter must start on line 1')
+        front = text.split('---')[1]
+        keys = {line.split(':')[0] for line in front.splitlines() if line and not line.startswith(' ')}
+        self.assertLessEqual(keys, {'name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'})
+        self.assertLessEqual(len(front.split('compatibility:')[1].split('\n')[0]), 500)
+
+    def test_howto_covers_every_platform(self):
+        for name in ('HOWTO.md', 'HOWTO.tr.md'):
+            text = (ROOT / name).read_text(encoding='utf-8')
+            for platform in ('OpenCode', 'Claude Code', 'Codex', 'Hermes', 'ChatGPT', 'Claude.ai'):
+                self.assertIn(f'## {platform}', text.replace('## OpenAI Codex', '## Codex'), (name, platform))
+
     def test_referenced_files_exist(self):
         text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
         for line in text.splitlines():

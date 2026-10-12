@@ -1,5 +1,7 @@
 # Installing per agent
 
+Step-by-step instructions with checks and troubleshooting are in `HOWTO.md` at the repository root. This page is the short reference.
+
 The same `SKILL.md` folder is used everywhere. The folder name must match the `name` field (`argus`). Web and shell access depend on the product and your account.
 
 | Agent | User scope | Project scope |

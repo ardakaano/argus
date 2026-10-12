@@ -9,7 +9,8 @@ Driven by the first round of evals (`evals/RESULTS.md`).
 - **SKILL.md**: Quick/Full rules that don't conflict (the user's words win), a progress checklist, a validate-fix-render loop with exact commands, a Quick-mode example (`assets/quick-example.md`), rules for local-file and user-reported facts, injection disclosure, community/ICP fit check, unknown promotion rules, no invented funnel numbers, competitor names from memory only as hypotheses, plain headings with no internal jargon.
 - **Renderer**: slow channels (speed 2 or less) never take a weeks 1-2 validation slot ("Background (slow payoff)"); no per-row `[assumption]` noise in hypothesis-only mode (one note instead); free-text `budget` for any currency; clearer score legend; a lint warning when fewer than two promotable channels can show a signal within weeks.
 - **References**: stage adaptation for experiments (no product, no audience, zero budget), venues that ban promotion, outreach rules for a zero audience, no-name products.
-- 64 tests (from 43).
+- **HOWTO.md / HOWTO.tr.md**: step-by-step install, check, first prompt, update, remove and troubleshooting for OpenCode, Claude Code, Codex, Hermes, ChatGPT and Claude.ai, with a 30-second test and links to each vendor's docs. Corrected the earlier claim that ChatGPT cannot install skills.
+- 66 tests (from 43), including a guard that the frontmatter stays within the portable spec keys (claude.ai uploads reject others).
 
 ## 0.2.1
 
