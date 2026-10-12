@@ -1,45 +1,49 @@
 # Argus — {{product_name}}
 
-**Research mode:** live / hypothesis-only
-**Target market:** {{market}}
-**Accessed on:** {{date}}
+**Mode:** live / hypothesis-only
+**Market:** {{market}}
+**Accessed on:** {{date}} (live mode only; omit when hypothesis-only)
 
 ## Verdict
-2–3 sentences: the recommendation and the biggest uncertainty.
+2-3 sentences: the recommendation. Then the biggest uncertainty.
 
 ## Product snapshot
-Problem, promise, stage, CTA, differentiation, pricing status.
+Problem, promise, stage, pricing, call to action, differentiation.
 
-## Ideal customer profiles
-One primary and up to two secondary: trigger, job-to-be-done, alternatives, objections.
+## Fixes on your own pages
+Defects found on the product's own pages (optional).
+
+## Ideal customers
+One primary, up to two secondary: job to be done, trigger, alternatives, objections.
 
 ## Evidence ledger
 | Claim | Status | Confidence | Source | Accessed |
 |---|---|---|---|---|
 
+Then: **Assumptions** (how you read the request) and **What was not checked** (blocked pages, no web).
+
 ## Against the plan
-Disconfirming evidence and open questions. Kill criteria.
+Disconfirming evidence and open questions. **Kill criteria**.
 
 ## Channel ranking
-| Channel | Score /100 | Role | Rationale | Rule / caveat |
-|---|---:|---|---|---|
+| Channel | Score /100 | Role | Rationale | Effort | Rule / caveat |
+|---|---:|---|---|---|---|
 
-## 30-day launch sprint
-- Week 1: confirm pain and positioning
-- Week 2: targeted distribution tests on the top two channels
-- Week 3: checkpoint, then optimize the best channel (add #3 only if justified)
-- Week 4: double down, document learnings, stop low-signal work
+Roles: Validate now (top two promotable channels with speed 3+), After checkpoint, Later, Background (slow payoff), Read the rules first, Participate only (promotion banned).
 
-Each week: objective, actions, success signal, stop/go gate.
+## Budget plan
+What is spent now, what is conditional on which result, what stays in reserve.
 
-## Copy pack (drafts)
-- Positioning sentence
-- 3 hooks (pain, outcome, contrast)
-- Launch post
-- Community-safe reply
+## 30-day sprint
+Four weeks. Each: objective, actions, signal, stop/go gate. Week 3 is the checkpoint.
 
-## Five experiments
-Hypothesis, channel, test, KPI, decision gate, budget.
+## Copy drafts
+Positioning, three hooks (pain, outcome, contrast), launch post, reply draft, outreach draft. Each is a draft the user approves.
 
-## Risks and next action
-Top risks and one concrete next action doable in 48 hours.
+## Experiments
+Five: hypothesis, channel, test, KPI, decision gate, budget. At least one startable within 48 hours.
+
+## Risks
+Top risks.
+
+**Next action:** one thing doable in 48 hours.

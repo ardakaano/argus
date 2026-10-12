@@ -187,28 +187,42 @@ class LintTests(unittest.TestCase):
         self.data['research_mode'] = 'live'
         self.assertIn('evidence ledger is empty', self.warnings())
 
-    def test_live_assumption_top_channel(self):
+    def test_live_assumption_top_channel_is_a_note_not_a_warning(self):
         data = live_report()
         data['channels'][0]['basis'] = 'assumption'
-        self.assertIn('assumptions', ' | '.join(module.lint(data)))
+        self.assertIn('assumptions', ' | '.join(module.notes(data)))
+        self.assertNotIn('assumptions', ' | '.join(module.lint(data)))
+
+    def test_too_few_fast_channels(self):
+        for channel in self.data['channels']:
+            channel['scores']['speed'] = 2
+        self.assertIn('within weeks', ' | '.join(module.notes(self.data)))
+        self.assertNotIn('within weeks', self.warnings())
 
     def test_too_few_promotable_channels(self):
         for channel in self.data['channels'][:3]:
             channel['promotion_allowed'] = False
-        self.assertIn('Fewer than 2', self.warnings())
+        self.assertIn('Fewer than 2', ' | '.join(module.notes(self.data)))
 
 
 class RenderTests(unittest.TestCase):
     def setUp(self):
         self.data = load('example-output.json')
 
-    def test_roles_skip_prohibited_channels(self):
+    def test_roles(self):
         result = module.render(self.data)
         lines = {line.split('|')[1].strip(): line for line in result.splitlines() if line.startswith('| ') and '/' not in line[:4]}
         self.assertIn('Participate only', lines['Subreddit that bans tool promotion'])
         self.assertIn('Validate now', lines['Founder communities (participation-first)'])
-        self.assertIn('Validate now', lines['Content on collecting feedback'])
-        self.assertIn('After checkpoint', lines['Launch directories'])
+        self.assertIn('Validate now', lines['Launch directories'])
+        self.assertIn('Background (slow payoff)', lines['Content on collecting feedback'])
+
+    def test_slow_channel_never_takes_a_validation_slot(self):
+        channels = [{'name': n, 'scores': {**{k: 3 for k in module.WEIGHTS}, 'speed': sp, 'icp_fit': ic}}
+                    for n, sp, ic in (('Slow but top', 1, 5), ('Fast A', 4, 4), ('Fast B', 3, 3), ('Fast C', 3, 2))]
+        roles = module._roles(module._ranked({'channels': channels}))
+        by_name = {c['name']: roles[id(c)] for c in channels}
+        self.assertEqual(by_name, {'Slow but top': 'slow', 'Fast A': 'validate', 'Fast B': 'validate', 'Fast C': 'checkpoint'})
 
     def test_ranked_descending_and_stable(self):
         ranked = module._ranked(self.data)
@@ -244,6 +258,155 @@ class RenderTests(unittest.TestCase):
         self.data['experiments'][0]['budget_usd'] = 25.5
         self.assertIn('Budget ceiling: $25.5', module.render(self.data))
 
+    def test_free_text_budget_wins_and_supports_any_currency(self):
+        self.data['experiments'][0]['budget_usd'] = 25.5
+        self.data['experiments'][0]['budget'] = '500 TL'
+        self.assertIn('Budget ceiling: 500 TL', module.render(self.data))
+        self.assertIn('500 TL', module.render_html(self.data))
+        self.data['experiments'][0]['budget'] = ' '
+        with self.assertRaises(ValueError):
+            module.validate(self.data)
+
+    def test_assumption_tag_only_in_live_mode(self):
+        self.assertNotIn('[assumption]', module.render(self.data))
+        self.assertIn('Every score here rests on assumptions', module.render(self.data))
+        live = live_report()
+        live['channels'][0]['basis'] = 'assumption'
+        self.assertIn('[assumption]', module.render(live))
+        self.assertNotIn('Every score here rests on assumptions', module.render(live))
+
+
+class ExtraFieldsTests(unittest.TestCase):
+    def setUp(self):
+        self.data = load('example-output.json')
+
+    def test_unknown_promotion_cannot_take_a_sprint_slot(self):
+        self.data['channels'][0]['promotion_allowed'] = 'unknown'
+        roles = module._roles(module._ranked(self.data))
+        by_name = {c['name']: roles[id(c)] for c in self.data['channels']}
+        self.assertEqual(by_name['Subreddit that bans tool promotion'], 'participate')
+        self.assertEqual(by_name[self.data['channels'][0]['name']], 'verify')
+        self.assertIn('Read the rules first', module.render(self.data))
+        self.assertIn('badge verify', module.render_html(self.data))
+        self.assertFalse(any('unknown for' in n for n in module.notes(self.data)), 'offline: unknown is expected')
+        live = live_report()
+        live['channels'][0]['promotion_allowed'] = 'unknown'
+        self.assertTrue(any('unknown for' in n for n in module.notes(live)))
+        self.assertFalse(any('unknown' in w or 'within weeks' in w for w in module.lint(live)), 'notes must not block --strict')
+
+    def test_promotion_allowed_rejects_other_values(self):
+        for bad in ('maybe', 1, None):
+            self.data['channels'][0]['promotion_allowed'] = bad
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                module.validate(self.data)
+
+    def test_new_sections_render_in_both_formats(self):
+        md, page = module.render(self.data), module.render_html(self.data)
+        for needle in ('Fixes on your own pages', 'Assumptions', 'What was not checked', 'Budget plan', 'no rate cards were verified'):
+            self.assertIn(needle, md)
+            self.assertIn(needle, page)
+        self.assertIn('id="audit"', page)
+        self.assertIn('id="budget"', page)
+
+    def test_outreach_draft_renders_escaped(self):
+        self.data['copy']['outreach_draft'] = 'Hi <b>Sam</b>\nquick question'
+        md, page = module.render(self.data), module.render_html(self.data)
+        self.assertIn('Outreach draft (one to one)', md)
+        self.assertIn('> Hi &lt;b&gt;Sam', md)
+        self.assertIn('Hi &lt;b&gt;Sam&lt;/b&gt;', page)
+        self.assertIn('Birebir mesaj taslağı', module.render(self.data, 'tr'))
+
+    def test_section_lists_must_be_strings(self):
+        for key in ('assumptions', 'limits', 'budget_plan', 'audit_findings'):
+            data = load('example-output.json')
+            data[key] = [1]
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                module.validate(data)
+
+    def test_source_type_and_note(self):
+        data = live_report()
+        data['evidence'][0]['source_type'] = 'secondary'
+        data['evidence'][0]['note'] = 'contradicts the pricing page'
+        md, page = module.render(data), module.render_html(data)
+        self.assertIn('(secondary)', md)
+        self.assertIn('contradicts the pricing page', md)
+        self.assertIn('contradicts the pricing page', page)
+        data['evidence'][0]['source_type'] = 'rumor'
+        with self.assertRaises(ValueError):
+            module.validate(data)
+
+    def test_two_channels_are_enough(self):
+        self.data['channels'] = self.data['channels'][1:3]
+        self.assertFalse(any('Expected 2-8' in w for w in module.lint(self.data)))
+        self.data['channels'] = self.data['channels'][:1]
+        self.assertTrue(any('Expected 2-8' in w for w in module.lint(self.data)))
+
+
+class HtmlTests(unittest.TestCase):
+    def setUp(self):
+        self.data = load('example-output.json')
+
+    def test_renders_all_sections(self):
+        result = module.render_html(self.data)
+        self.assertTrue(result.startswith('<!doctype html>'))
+        for anchor in ('verdict', 'snapshot', 'icps', 'evidence', 'against', 'channels', 'sprint', 'copy', 'experiments', 'risks'):
+            self.assertIn(f'id="{anchor}"', result)
+        self.assertIn('Founder communities (participation-first)', result)
+        self.assertIn('badge validate', result)
+        self.assertIn('badge participate', result)
+
+    def test_is_self_contained(self):
+        result = module.render_html(live_report())
+        self.assertNotIn('<script', result)
+        self.assertNotIn('<link', result)
+        self.assertNotIn('@import', result)
+        self.assertNotIn('src="http', result)
+        self.assertIn("default-src 'none'", result)
+        # The only outbound reference is the evidence link, marked nofollow.
+        self.assertEqual(result.count('href="http'), 1)
+        self.assertIn('rel="noopener noreferrer nofollow"', result)
+
+    def test_untrusted_text_is_escaped(self):
+        self.data['product_name'] = '<img src=x onerror=alert(1)>'
+        self.data['summary'] = '"><script>alert(1)</script>'
+        self.data['channels'][0]['name'] = '<b>x</b>'
+        self.data['copy']['launch_post'] = '<iframe src=//evil></iframe>\n# heading'
+        self.data['weeks'][0]['actions'] = ['<svg onload=alert(1)>']
+        result = module.render_html(self.data)
+        for needle in ('<img src=x', '<script>alert', '<b>x</b>', '<iframe', '<svg onload'):
+            self.assertNotIn(needle, result)
+        self.assertIn('&lt;script&gt;', result)
+
+    def test_url_attribute_cannot_break_out(self):
+        data = live_report()
+        data['evidence'][0]['source_url'] = 'https://example.com/?q="onmouseover=alert(1)'
+        result = module.render_html(data)
+        self.assertNotIn('"onmouseover', result)
+        self.assertIn('&quot;onmouseover', result)
+
+    def test_language_and_banner(self):
+        self.assertIn('<html lang="tr">', module.render_html(self.data, 'tr'))
+        self.assertIn('Karar', module.render_html(self.data, 'tr'))
+        self.assertIn('class="banner"', module.render_html(self.data))
+        self.assertNotIn('class="banner"', module.render_html(live_report()))
+        with self.assertRaises(ValueError):
+            module.render_html(self.data, 'xx')
+
+    def test_validates_first(self):
+        self.data['research_mode'] = 'vibes'
+        with self.assertRaises(ValueError):
+            module.render_html(self.data)
+
+    def test_score_bar_width_matches_score(self):
+        top = module._ranked(self.data)[0][0]
+        self.assertIn(f'width:{top}%', module.render_html(self.data))
+
+    def test_shipped_html_in_sync(self):
+        for source, target in (('example-output.json', 'example-report.html'), ('example-output.tr.json', 'example-report.tr.html')):
+            with self.subTest(target=target):
+                actual = (SKILL / 'examples' / target).read_text(encoding='utf-8')
+                self.assertEqual(actual, module.render_html(load(source)), 'Regenerate with `make examples`')
+
 
 class CliTests(unittest.TestCase):
     def run_cli(self, *args, stdin=None):
@@ -269,6 +432,17 @@ class CliTests(unittest.TestCase):
         code, out, _ = self.run_cli(self.example())
         self.assertEqual(code, 0)
         self.assertIn('# Argus — FormNest', out)
+
+    def test_notes_print_but_do_not_fail_strict(self):
+        import tempfile
+        data = live_report()
+        data['channels'][0]['basis'] = 'assumption'
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'f.json'
+            path.write_text(json.dumps(data), encoding='utf-8')
+            code, out, err = self.run_cli(str(path), '--check', '--strict')
+        self.assertEqual((code, out.strip()), (0, 'OK'))
+        self.assertIn('note:', err)
 
     def test_check(self):
         code, out, _ = self.run_cli(self.example(), '--check')
@@ -308,6 +482,19 @@ class CliTests(unittest.TestCase):
             code, out, _ = self.run_cli(self.example(), '-o', str(target), '--lang', 'tr')
             self.assertEqual(code, 0)
             self.assertIn('## Karar', target.read_text(encoding='utf-8'))
+
+    def test_html_by_extension_and_flag(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            target = Path(tmp) / 'out.html'
+            code, _, _ = self.run_cli(self.example(), '-o', str(target))
+            self.assertEqual(code, 0)
+            self.assertTrue(target.read_text(encoding='utf-8').startswith('<!doctype html>'))
+            md = Path(tmp) / 'out.md'
+            self.run_cli(self.example(), '-o', str(md))
+            self.assertTrue(md.read_text(encoding='utf-8').startswith('# Argus'))
+        code, out, _ = self.run_cli(self.example(), '--html')
+        self.assertTrue(out.startswith('<!doctype html>'))
 
     def test_input_required(self):
         code, _, _ = self.run_cli()

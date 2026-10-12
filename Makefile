@@ -10,6 +10,8 @@ test:
 examples:
 	$(RENDER) $(SKILL)/examples/example-output.json -o $(SKILL)/examples/example-report.md
 	$(RENDER) $(SKILL)/examples/example-output.tr.json -o $(SKILL)/examples/example-report.tr.md
+	$(RENDER) $(SKILL)/examples/example-output.json -o $(SKILL)/examples/example-report.html
+	$(RENDER) $(SKILL)/examples/example-output.tr.json -o $(SKILL)/examples/example-report.tr.html
 
 # Regenerate the logo SVGs (the PNG banner is rendered from the SVG with a browser).
 logo:

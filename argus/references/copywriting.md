@@ -29,8 +29,22 @@ Use three **different angles**, not three rewordings of the same line:
 - Answer the person's actual question first, fully, without needing the product.
 - Mention the product only if it's relevant and the rules allow it. Disclose that you made it.
 - Don't paste the same reply twice. Don't reply to posts older than the venue considers fresh.
-- No DMs to people who did not ask.
+- No bulk or unsolicited mass DMs. A personal one-to-one message to someone with a real connection to the topic is fine for a conversation request: say who you are, why you write, and make saying no easy.
 
 ## Before the user posts anything
 
 Remind them to re-read the venue's current rules, post from their own account, and approve the final text. Argus drafts and never posts.
+
+## No product name yet
+
+Use `[Product]` as a placeholder and tell the user which drafts need the name. Do not invent a name unless asked.
+
+## Venues that ban promotion
+
+When the user's target community forbids self-promotion or links:
+
+- Do not draft a launch post for it, not even a "soft" one.
+- Draft a help-only reply: answer the question, no product name, no link, no profile pitch.
+- Offer an optional message to the moderators asking what is allowed (for example a feedback thread). It is the user's call to send it.
+- Put the real launch post where it is allowed: the user's own network, their own accounts, or venues whose rules permit it.
+- A profile mention of the product may also break the rules; tell the user to check first.

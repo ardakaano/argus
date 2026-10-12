@@ -26,5 +26,11 @@ This is the same as `round(20 * (0.25*icp_fit + 0.20*intent + 0.15*reachability 
 - If an input is unknown, say so and score it conservatively (3), or ask. Do not invent evidence to justify a score.
 - Mark `basis` as `evidence` or `assumption` for each channel. A high score built on assumptions is a hypothesis to test.
 - If a community or platform **prohibits promotion**, set `promotion_allowed: false`. The channel can stay in the table as a place to learn and help, but not to post promotional content, whatever the score.
-- Validate the top two channels in weeks 1–2. Promote channel #3 only after the checkpoint. Do not run more than three at once.
+- Validate the top two **fast** channels in weeks 1–2 (speed 3 or higher). A slow channel (speed 1–2, for example SEO content) never takes a validation slot, however well it scores: the renderer marks it "Background (slow payoff)". Promote the next fast channel only after the checkpoint. Do not run more than three at once.
+- If promotion rules are unknown or unreadable, set `promotion_allowed: "unknown"` (the renderer shows "Read the rules first") until you have read them, and say so in `rule`. `false` is for rules you know forbid promotion.
+- Check audience fit before the score: a community whose members are not the primary ICP gets a low `icp_fit`, whatever its rules or size.
+- A fact the user reported (for example "the forum bans promotion") is not evidence you saw. Use `basis: assumption` for scores that depend on it unless you read the source.
+- For a venue category you could not look up (offline), score each dimension you cannot judge at 3 rather than guessing high or low.
+- With no live research, every score is an assumption. Say in the report that the scores are a rough ordering of hypotheses. The renderer adds this note in hypothesis-only mode.
+- A prohibited channel can still score high because people there discuss the problem. Show it as "learn and help only"; it does not count toward the three sprint channels.
 - Prefer channels where the founder has real standing or can earn it by being useful. Cold reach with no standing scores low on `reachability`.

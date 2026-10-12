@@ -39,11 +39,13 @@ Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların
 ## Kanal sıralaması
 | Kanal | Skor /100 | Rol | Gerekçe | Efor | Kural / dikkat |
 |---|---:|---|---|---|---|
-| Doğrudan görüşmeler | 82 (5·3·3·5·5·3·5) | Şimdi doğrula (hafta 1–2) | [varsayım] En hızlı sinyal; ölçeklenmez ama problemi kanıtlar. | Orta | İzinsiz toplu mesaj yok |
-| Meslek toplulukları (katılım odaklı) | 72 (4·3·3·4·5·3·3) | Şimdi doğrula (hafta 1–2) | [varsayım] Hedef kitleyle hızlı niteliksel geri bildirim. | Orta | Her topluluğun güncel tanıtım kuralını kontrol et |
-| Arama odaklı içerik | 65 (3·4·3·2·5·2·5) | Kontrol noktasından sonra | [varsayım] Zamanla birikir ama doğrulaması yavaş. | Yüksek | Yok |
+| Doğrudan görüşmeler | 82 (5·3·3·5·5·3·5) | Şimdi doğrula (hafta 1–2) | En hızlı sinyal; ölçeklenmez ama problemi kanıtlar. | Orta | İzinsiz toplu mesaj yok |
+| Meslek toplulukları (katılım odaklı) | 72 (4·3·3·4·5·3·3) | Şimdi doğrula (hafta 1–2) | Hedef kitleyle hızlı niteliksel geri bildirim. | Orta | Her topluluğun güncel tanıtım kuralını kontrol et |
+| Arama odaklı içerik | 65 (3·4·3·2·5·2·5) | Arka planda (yavaş dönüş) | Zamanla birikir ama doğrulaması yavaş. | Yüksek | Yok |
 
-*Skor = ICP uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik (her biri 1–5, ağırlıklı). Karşılaştırma aracıdır, tahmin değildir.*
+*Skor /100 ağırlıklı toplamdır. Parantez içinde yedi girdi (her biri 1–5) şu sırayla: ICP uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik. Karşılaştırma aracıdır, tahmin değildir.*
+
+*Buradaki her skor varsayıma dayanır. Ölçülmüş uyum değil, hipotezlerin kaba bir sıralaması olarak oku.*
 
 ## 30 günlük sprint
 

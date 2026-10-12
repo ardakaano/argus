@@ -18,6 +18,10 @@ Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-
 - **Call to action:** Join the beta
 - **Differentiation:** Setup time measured in minutes, not days.
 
+## Fixes on your own pages
+- The page promises 'minutes' but shows no setup walkthrough; add a 60-second demo.
+- Pricing is 'Not set'; even a placeholder range would help beta users decide.
+
 ## Ideal customers
 
 ### Solo SaaS founder with 50-500 users (primary)
@@ -37,6 +41,13 @@ Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-
 |---|---|---|---|---|
 | No verified live evidence in this report | unverified | — | — | — |
 
+**Assumptions**
+- 'Solo SaaS founder' means a single maker with roughly 50-500 users.
+- The product works today; only its stage and pricing are unknown.
+
+**What was not checked**
+- No web access: nothing was checked against a live source.
+
 ## Against the plan
 - Free alternatives (a form plus a spreadsheet) may be good enough for most solo founders.
 - Open question: do founders at this size act on in-app feedback, or does their volume stay too low for a tool to matter?
@@ -48,12 +59,19 @@ Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-
 ## Channel ranking
 | Channel | Score /100 | Role | Rationale | Effort | Rule / caveat |
 |---|---:|---|---|---|---|
-| Subreddit that bans tool promotion | 79 (5·4·3·4·5·3·1) | Participate only, no promotion | [assumption] Great place to learn what people complain about. | Low | Hypothetical: rules prohibit self-promotion, so listen and help only |
-| Founder communities (participation-first) | 75 (4·3·4·4·5·3·3) | Validate now (weeks 1–2) | [assumption] Fast qualitative feedback from the exact ICP, if the founder has standing. | Medium: daily presence for two weeks | Check each community's current promotion rules |
-| Content on collecting feedback | 66 (4·3·3·2·5·2·5) | Validate now (weeks 1–2) | [assumption] Compounding search reach, but slow validation. | High: one useful post per week | None beyond honest disclosure |
-| Launch directories | 57 (2·2·3·4·4·3·4) | After checkpoint | [assumption] A spike of visits, mostly other makers, not buyers. | Low | Read each directory's guidelines |
+| Subreddit that bans tool promotion | 79 (5·4·3·4·5·3·1) | Participate only, no promotion | Great place to learn what people complain about. | Low | Hypothetical: rules prohibit self-promotion, so listen and help only |
+| Founder communities (participation-first) | 75 (4·3·4·4·5·3·3) | Validate now (weeks 1–2) | Fast qualitative feedback from the exact ICP, if the founder has standing. | Medium: daily presence for two weeks | Check each community's current promotion rules |
+| Content on collecting feedback | 66 (4·3·3·2·5·2·5) | Background (slow payoff) | Compounding search reach, but slow validation. | High: one useful post per week | None beyond honest disclosure |
+| Launch directories | 57 (2·2·3·4·4·3·4) | Validate now (weeks 1–2) | A spike of visits, mostly other makers, not buyers. | Low | Read each directory's guidelines |
 
-*Score = ICP fit·Intent·Reach·Speed·Cost·Ease·Safety (1–5 each, weighted). A comparison aid, not a forecast.*
+*Score /100 is a weighted sum. In brackets, the seven 1–5 inputs in this order: ICP fit·Intent·Reach·Speed·Cost·Ease·Safety. A comparison aid, not a forecast.*
+
+*Every score here rests on assumptions. Read them as a rough ordering of hypotheses, not as measured fit.*
+
+## Budget plan
+- $0 now: every first-sprint test is free.
+- Up to $100 only after week 2, and only for the channel that produced signal.
+- $100 stays in reserve; no rate cards were verified.
 
 ## 30-day sprint
 
@@ -98,6 +116,10 @@ Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-
 **Reply draft**
 
 > The trade-off with feedback tools is usually setup time versus workflow depth. What matters most for your app right now? (Disclosure: I'm building a small tool in this space.)
+
+**Outreach draft (one to one)**
+
+> Hi Sam, I'm building a small feedback widget for SaaS apps and you're the first person I thought of: you ship a product solo. Could I ask you 3 questions about how you hear from users today? 10 minutes, no pitch, and a plain 'no thanks' is totally fine.
 
 ## Experiments
 1. **Target founders describe late feedback as a real pain without prompting**

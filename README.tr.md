@@ -59,15 +59,22 @@ Python 3.10+, bağımlılık yok:
 ```bash
 python3 argus/scripts/render_report.py --template > bulgular.json
 python3 argus/scripts/render_report.py bulgular.json --lang tr -o plan.md
+python3 argus/scripts/render_report.py bulgular.json --lang tr -o plan.html   # tek dosyalık HTML rapor
 python3 argus/scripts/render_report.py bulgular.json --check --strict
 ```
 
-Türkçe örnek rapor: [`example-report.tr.md`](argus/examples/example-report.tr.md). Ürün kurgusaldır.
+HTML rapor tek ve bağımsız bir dosyadır: satır içi CSS, script yok, dış istek yok, koyu/açık tema, yazdırmaya hazır. Ekibe gönderebilir ya da PDF'e yazdırabilirsin.
+
+Türkçe örnekler (ürün kurgusaldır): [`example-report.tr.html`](argus/examples/example-report.tr.html) ve [`example-report.tr.md`](argus/examples/example-report.tr.md).
+
+## Çalışıyor mu? Eval'ler
+
+[`evals/`](evals/README.md) altında dört davranış senaryosu var: canlı URL denetimi, web'siz hipotez modu, prompt-injection içeren bir sayfa ve tanıtımı yasaklayan forumla ilgili Türkçe bir istek. Her biri skill'li ve skill'siz koşturuldu. Sonuçlar: [`evals/RESULTS.md`](evals/RESULTS.md).
 
 ## Geliştirme
 
 ```bash
-make test       # 43 test
+make test       # 64 test
 make examples   # örnek raporları yeniden üret
 make zip        # Claude.ai için argus-skill.zip
 ```

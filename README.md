@@ -8,7 +8,7 @@ In Greek myth, Argus Panoptes was the watcher with a hundred eyes, and some of t
 
 Your product needs a distribution strategy, not another launch checklist. Argus picks three channels instead of fifteen, shows its sources, and says what it could not verify.
 
-> Status: **v0.2.1**. Research is done by your agent with its own web tools. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
+> Status: **v0.3.0**. Research is done by your agent with its own web tools. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
 
 ## What you get
 
@@ -52,20 +52,27 @@ Project-scoped locations and ChatGPT notes are in [`argus/references/platforms.m
 
 Without web access, Argus produces a clearly labeled **hypothesis-only** plan. It does not pretend to have audited your URL.
 
-## Optional report renderer
+## Optional report renderer (markdown or a shareable HTML page)
 
 Python 3.10+, no dependencies. Your agent saves its findings as JSON, and the script validates and renders them:
 
 ```bash
 python3 argus/scripts/render_report.py --template > findings.json       # skeleton
-python3 argus/scripts/render_report.py findings.json -o plan.md          # render
+python3 argus/scripts/render_report.py findings.json -o plan.md          # markdown
+python3 argus/scripts/render_report.py findings.json -o plan.html        # one-file HTML report
 python3 argus/scripts/render_report.py findings.json --lang tr           # Turkish headings
 python3 argus/scripts/render_report.py findings.json --check --strict    # quality gate only
 ```
 
 It rejects malformed findings (for example, a "verified" claim without a URL and date), warns about quality-gate gaps, and neutralizes pipes, newlines and raw HTML in text that came from the web. See [`report-format.md`](argus/references/report-format.md).
 
-Sample output: [`example-report.md`](argus/examples/example-report.md) (English) and [`example-report.tr.md`](argus/examples/example-report.tr.md) (Türkçe). The product in both is fictional.
+The HTML report is a single self-contained file: inline CSS, no scripts, no external requests, dark/light theme, print-ready. Send it to a teammate or print it to PDF.
+
+Samples (the product is fictional): [`example-report.html`](argus/examples/example-report.html), [`example-report.md`](argus/examples/example-report.md), and Turkish [`example-report.tr.html`](argus/examples/example-report.tr.html) / [`.tr.md`](argus/examples/example-report.tr.md).
+
+## Does it work? Evals
+
+Skills should be tested, not just written. [`evals/`](evals/README.md) has four behavioural scenarios (live URL audit, no-web hypothesis mode, a prompt-injection page, a Turkish request about a forum that bans promotion), run with and without the skill. Results and what they changed are in [`evals/RESULTS.md`](evals/RESULTS.md).
 
 ## Layout
 
@@ -78,6 +85,7 @@ argus/                        ← repo
 │   ├── scripts/render_report.py
 │   └── examples/             input/output JSON (en, tr) and rendered reports
 ├── assets/                   logo, icon, social preview, build_logo.py
+├── evals/                    scenarios, injection fixture, graded results
 ├── tests/test_render.py
 ├── Makefile                  test | examples | logo | zip
 └── .github/workflows/test.yml
@@ -86,7 +94,7 @@ argus/                        ← repo
 ## Develop
 
 ```bash
-make test       # 43 tests, stdlib only
+make test       # 64 tests, stdlib only
 make examples   # regenerate rendered examples (a test checks they are in sync)
 ```
 

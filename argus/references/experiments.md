@@ -33,3 +33,16 @@ Define in advance what, after the first two weeks, means "change the ICP, the pr
 - Users install but none reach the first value moment, and two onboarding fixes did not change it.
 
 Write the criteria down before running the tests. Otherwise a weak result will get explained away.
+
+## Adapting to the stage
+
+The set of five assumes testers exist. Adapt it, keeping five tests and at least one startable in 48 hours:
+
+- **No product yet:** swap the activation test for a fake-door or concierge test (a landing page, a manual service). Swap willingness-to-pay for a price question in the conversations or a pre-order page.
+- **No audience yet:** the channel test is one-to-one outreach to people with a real connection to the topic, or a warm introduction, not a post. Keep it personal, disclose who you are, and make saying no easy. Never bulk-message.
+- **Zero budget:** every experiment costs 0 (`budget: "0"`); say so rather than inventing a spend. Suggest a small cap only as the user's own optional choice.
+- **Budget in another currency:** state it in the user's currency (`budget` field in the report), never convert silently.
+
+## Small budgets
+
+With a small budget (for example $300 or 2000 TL), the default is **do not spend yet**. Hold the money behind a checkpoint: spend only after a free test shows signal. Never invent rate cards or prices for sponsorships and ads; if you did not verify them, say so and give the test as "ask for a quote". Split the budget into a plan (`budget_plan`): what is spent now, what is conditional on which result, and what stays in reserve.
