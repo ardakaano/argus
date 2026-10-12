@@ -38,7 +38,7 @@ Then copy the inner `argus/` folder (the skill) to your agent's skills directory
 | OpenAI Codex | `mkdir -p ~/.agents/skills && cp -R argus ~/.agents/skills/` |
 | Hermes | `mkdir -p ~/.hermes/skills && cp -R argus ~/.hermes/skills/` |
 | ChatGPT | `make zip`, then sidebar **Plugins > Skills > Create > Upload from your computer**; invoke with `@argus` (plan and workspace permitting) |
-| Claude.ai | `make zip`, then upload `argus-skill.zip` where custom skills are available |
+| Claude.ai | `make zip`, then **Customize > Skills > "+" > Create skill > Upload a skill**, and toggle it on (needs "Code execution and file creation" enabled) |
 
 Project-scoped locations and ChatGPT notes are in [`argus/references/platforms.md`](argus/references/platforms.md).
 

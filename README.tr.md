@@ -36,6 +36,8 @@ Sonra içteki `argus/` klasörünü (skill'in kendisi) ajanının skills dizinin
 mkdir -p ~/.config/opencode/skills && cp -R argus ~/.config/opencode/skills/
 # ChatGPT: make zip, sonra kenar çubuğunda Plugins > Skills > Create > Upload from your computer
 # (sohbette @argus ile çağır; plan ve çalışma alanı iznine bağlı)
+# Claude.ai: make zip, sonra Customize > Skills > "+" > Create skill > Upload a skill; aç (toggle)
+# (Settings > Capabilities'te "Code execution and file creation" açık olmalı)
 # Claude Code
 mkdir -p ~/.claude/skills && cp -R argus ~/.claude/skills/
 # OpenAI Codex

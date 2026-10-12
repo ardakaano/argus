@@ -8,8 +8,14 @@ The same `SKILL.md` folder is used everywhere. The folder name must match the `n
 | Claude Code | `~/.claude/skills/argus/` | `.claude/skills/argus/` |
 | OpenAI Codex | `~/.codex/skills/argus/` (`$CODEX_HOME/skills`) | `.agents/skills/argus/` |
 | Hermes | `~/.hermes/skills/argus/` | n/a |
-| Claude.ai | Upload a ZIP whose root contains the `argus/` folder (`make zip`) where custom skills are available. | n/a |
+| Claude.ai | **Customize > Skills** > "+" > **Create skill** > **Upload a skill**, then the ZIP from `make zip`. Toggle it on. | n/a |
 | ChatGPT | Sidebar > **Plugins** > **Skills** tab > **Create** > **Upload from your computer** (upload the ZIP from `make zip`). | n/a |
+
+## Claude.ai
+
+Checked against Anthropic's help center, October 2026. Available on Free, Pro, Max, Team and Enterprise, and it needs **Code execution and file creation** switched on (Settings > Capabilities; on Team and Enterprise an owner enables it under Organization settings > Plugins & skills). The ZIP must contain the skill folder as its root, which is what `make zip` builds. After uploading, toggle the skill on and try an explicit prompt ("Use my Argus skill to audit ..."). Skills you enable also sync to Claude Code when you are signed in with the same account.
+
+If an upload fails, the help center lists these causes: ZIP too large, folder name not matching the skill name, missing `SKILL.md`, invalid characters in the name or description. One thing to watch: Anthropic's "How to create custom skills" article still says the description is limited to 200 characters, while the Agent Skills spec allows 1024. Argus's description is about 490 characters. I could not test an upload; if yours is rejected for length, shorten the `description` line in `SKILL.md` to about 200 characters and keep the Turkish trigger phrases.
 
 ## ChatGPT
 
