@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="Argus">
+<metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"><rdf:Description rdf:about=""><dc:creator>Arda Kaan Özcan</dc:creator><dc:rights>© 2026 Arda Kaan Özcan. MIT License.</dc:rights><dc:source>https://github.com/ardakaano/argus</dc:source><cc:attributionName>Arda Kaan Özcan</cc:attributionName></rdf:Description></rdf:RDF></metadata>
+<title>Argus</title>
+<rect x="0" y="0" width="72" height="72" fill="#151713" rx="14"/>
+<rect x="2" y="6" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="18" y="2" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="38" y="6" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="54" y="2" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="66" y="10" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="6" y="62" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="26" y="66" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="46" y="62" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<rect x="62" y="66" width="4" height="4" fill="#C1FF00" opacity=".55"/>
+<g transform="translate(2 2)">
+<rect x="26" y="18" width="20" height="4" fill="#5C7A00"/>
+<rect x="18" y="22" width="36" height="4" fill="#5C7A00"/>
+<rect x="10" y="26" width="52" height="4" fill="#5C7A00"/>
+<rect x="6" y="30" width="60" height="4" fill="#5C7A00"/>
+<rect x="6" y="34" width="60" height="4" fill="#5C7A00"/>
+<rect x="6" y="38" width="60" height="4" fill="#5C7A00"/>
+<rect x="10" y="42" width="52" height="4" fill="#5C7A00"/>
+<rect x="18" y="46" width="36" height="4" fill="#5C7A00"/>
+<rect x="26" y="50" width="20" height="4" fill="#5C7A00"/>
+</g>
+<rect x="26" y="18" width="20" height="4" fill="#C1FF00"/>
+<rect x="18" y="22" width="36" height="4" fill="#C1FF00"/>
+<rect x="10" y="26" width="52" height="4" fill="#C1FF00"/>
+<rect x="6" y="30" width="60" height="4" fill="#C1FF00"/>
+<rect x="6" y="34" width="60" height="4" fill="#C1FF00"/>
+<rect x="6" y="38" width="60" height="4" fill="#C1FF00"/>
+<rect x="10" y="42" width="52" height="4" fill="#C1FF00"/>
+<rect x="18" y="46" width="36" height="4" fill="#C1FF00"/>
+<rect x="26" y="50" width="20" height="4" fill="#C1FF00"/>
+<rect x="30" y="30" width="12" height="12" fill="#151713"/>
+<rect x="30" y="30" width="4" height="4" fill="#C1FF00"/>
+</svg>

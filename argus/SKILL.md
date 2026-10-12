@@ -4,8 +4,8 @@ description: Research and build evidence-backed go-to-market and launch plans fo
 license: MIT
 compatibility: Live evidence needs web research access. Optional Python 3.10+ script uses only the standard library. Works in read-only conversational mode without shell access.
 metadata:
-  author: byako
-  version: "0.2.0"
+  author: Arda Kaan Özcan
+  version: "0.2.1"
 ---
 
 # Argus

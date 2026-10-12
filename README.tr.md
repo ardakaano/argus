@@ -1,6 +1,8 @@
-# Argus 👁️
+<p align="center">
+  <img src="assets/logo.svg" alt="Argus" width="380">
+</p>
 
-**Lansmanın üzerinde yüz göz.**
+<h3 align="center">Lansmanın üzerinde yüz göz.</h3>
 
 Yunan mitolojisinde Argus Panoptes, yüz gözlü bekçiydi ve gözlerinden bir kısmı her zaman açıktı. Bu Agent Skill, yapay zeka ajanına SaaS, uygulama veya bağımsız ürün lansmanında aynı alışkanlığı kazandırır: ürünü, müşterileri, rakipleri, toplulukları ve kanalları birlikte izler ve planın yanlış olduğunu gösteren kanıta karşı bir gözünü hep açık tutar.
 
@@ -70,6 +72,10 @@ make examples   # örnek raporları yeniden üret
 make zip        # Claude.ai için argus-skill.zip
 ```
 
+## Yazar
+
+[Arda Kaan Özcan](https://github.com/ardakaano) tarafından geliştirildi.
+
 ## Lisans
 
-MIT. Bkz. [LICENSE](LICENSE).
+MIT. Bkz. [LICENSE](LICENSE). `assets/` altındaki logo © Arda Kaan Özcan, aynı lisans altındadır.

@@ -1,12 +1,14 @@
-# Argus 👁️
+<p align="center">
+  <img src="assets/logo.svg" alt="Argus" width="380">
+</p>
 
-**A hundred eyes on your launch.**
+<h3 align="center">A hundred eyes on your launch.</h3>
 
 In Greek myth, Argus Panoptes was the watcher with a hundred eyes, and some of them were always awake. This Agent Skill gives your AI agent the same habit for launching a SaaS, app or indie product: look at the product, customers, competitors, communities and channels together, and keep one eye open for evidence that your plan is wrong.
 
 Your product needs a distribution strategy, not another launch checklist. Argus picks three channels instead of fifteen, shows its sources, and says what it could not verify.
 
-> Status: **v0.2.0**. Research is done by your agent with its own web tools. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
+> Status: **v0.2.1**. Research is done by your agent with its own web tools. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
 
 ## What you get
 
@@ -75,8 +77,9 @@ argus/                        ← repo
 │   ├── assets/report-template.md
 │   ├── scripts/render_report.py
 │   └── examples/             input/output JSON (en, tr) and rendered reports
+├── assets/                   logo, icon, social preview, build_logo.py
 ├── tests/test_render.py
-├── Makefile                  test | examples | zip
+├── Makefile                  test | examples | logo | zip
 └── .github/workflows/test.yml
 ```
 
@@ -100,6 +103,10 @@ make examples   # regenerate rendered examples (a test checks they are in sync)
 
 PRs welcome: scoring calibration, source verification, translations, install testing on more agents. Please don't contribute scraping that bypasses access controls, unsolicited mass messaging, or invented data.
 
+## Author
+
+Created by [Arda Kaan Özcan](https://github.com/ardakaano).
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). The logo in `assets/` is © Arda Kaan Özcan, under the same license.

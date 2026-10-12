@@ -1,7 +1,7 @@
 SKILL := argus
 RENDER := python3 $(SKILL)/scripts/render_report.py
 
-.PHONY: test examples zip clean
+.PHONY: test examples logo zip clean
 
 test:
 	python3 -m unittest discover -s tests -v
@@ -10,6 +10,10 @@ test:
 examples:
 	$(RENDER) $(SKILL)/examples/example-output.json -o $(SKILL)/examples/example-report.md
 	$(RENDER) $(SKILL)/examples/example-output.tr.json -o $(SKILL)/examples/example-report.tr.md
+
+# Regenerate the logo SVGs (the PNG banner is rendered from the SVG with a browser).
+logo:
+	python3 assets/build_logo.py
 
 # ZIP for Claude.ai custom skills: the archive root contains the argus/ folder.
 zip:
