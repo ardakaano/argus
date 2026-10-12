@@ -23,7 +23,11 @@ Yunan mitolojisinde Argus Panoptes, yüz gözlü bekçiydi ve gözlerinden bir k
 
 ## Kurulum
 
-Klasör adı skill adıyla (`argus`) aynı olmalı.
+```bash
+git clone https://github.com/ardakaano/argus.git && cd argus
+```
+
+Sonra içteki `argus/` klasörünü (skill'in kendisi) ajanının skills dizinine kopyala. Klasör adı skill adıyla (`argus`) aynı olmalı.
 
 ```bash
 # OpenCode

@@ -23,7 +23,11 @@ Two modes: **Quick** (one screen) and **Full** (everything above). Replies in yo
 
 ## Install
 
-The folder name must match the skill name (`argus`).
+```bash
+git clone https://github.com/ardakaano/argus.git && cd argus
+```
+
+Then copy the inner `argus/` folder (the skill) to your agent's skills directory. The folder name must match the skill name (`argus`).
 
 | Agent | Command |
 |---|---|
