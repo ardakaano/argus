@@ -20,6 +20,7 @@ def load(name):
 def live_report():
     data = load('example-output.json')
     data['research_mode'] = 'live'
+    data['product_url'] = 'https://example.com'
     data['accessed_on'] = '2026-10-12'
     data['evidence'] = [{'claim': 'Pricing page lists three plans', 'status': 'verified', 'confidence': 'high',
                          'source_url': 'https://example.com/pricing', 'accessed_on': '2026-10-12'}]
@@ -276,6 +277,58 @@ class RenderTests(unittest.TestCase):
         self.assertNotIn('Every score here rests on assumptions', module.render(live))
 
 
+class ResearchGateTests(unittest.TestCase):
+    def test_live_report_requires_the_url_the_user_gave(self):
+        data = live_report()
+        del data['product_url']
+        for render in (module.render, module.render_html):
+            with self.subTest(render=render.__name__), self.assertRaises(ValueError) as ctx:
+                render(data)
+            self.assertIn('requires product_url', str(ctx.exception))
+
+    def test_live_with_url_is_fine(self):
+        module.validate(live_report())
+
+    def test_hypothesis_only_needs_no_url(self):
+        data = load('example-output.json')
+        self.assertNotIn('product_url', data)
+        module.validate(data)
+
+    def test_bad_urls_rejected(self):
+        for bad in ('example.com', 'javascript:alert(1)', 'ftp://example.com', '', None, 'https://x.com/<b>'):
+            data = live_report()
+            data['product_url'] = bad
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                module.validate(data)
+
+    def test_url_is_shown_and_escaped(self):
+        data = live_report()
+        data['product_url'] = 'https://example.com/?q="x'
+        self.assertIn('<https://example.com/?q="x>', module.render(data))
+        page = module.render_html(data)
+        self.assertIn('&quot;x', page)
+        self.assertNotIn('href="https://example.com/?q="x', page)
+        self.assertIn('Ürün URL', module.render(data, 'tr'))
+
+    def test_cli_rejects_live_without_url(self):
+        import tempfile
+        data = live_report()
+        del data['product_url']
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'f.json'
+            path.write_text(json.dumps(data), encoding='utf-8')
+            out, err = io.StringIO(), io.StringIO()
+            with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+                code = module.main([str(path), '--check'])
+        self.assertEqual(code, 1)
+        self.assertIn('no research', err.getvalue())
+
+    def test_skill_states_the_gate(self):
+        text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
+        self.assertIn('Never research unless the user gave you a URL', text)
+        self.assertIn('product_url', text)
+
+
 class ExtraFieldsTests(unittest.TestCase):
     def setUp(self):
         self.data = load('example-output.json')
@@ -362,9 +415,9 @@ class HtmlTests(unittest.TestCase):
         self.assertNotIn('@import', result)
         self.assertNotIn('src="http', result)
         self.assertIn("default-src 'none'", result)
-        # The only outbound reference is the evidence link, marked nofollow.
-        self.assertEqual(result.count('href="http'), 1)
-        self.assertIn('rel="noopener noreferrer nofollow"', result)
+        # The only outbound references are the product URL and the evidence link, both nofollow.
+        self.assertEqual(result.count('href="http'), 2)
+        self.assertEqual(result.count('rel="noopener noreferrer nofollow"'), 2)
 
     def test_untrusted_text_is_escaped(self):
         self.data['product_name'] = '<img src=x onerror=alert(1)>'

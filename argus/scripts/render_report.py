@@ -25,7 +25,7 @@ SOURCE_TYPES = ("primary", "secondary", "snippet")
 SLOW_SPEED = 2  # channels scoring this low or lower on speed cannot take a weeks 1-2 validation slot
 
 KNOWN = {
-    "root": {"product_name", "research_mode", "accessed_on", "language", "market", "summary",
+    "root": {"product_name", "research_mode", "product_url", "accessed_on", "language", "market", "summary",
              "biggest_uncertainty", "snapshot", "audit_findings", "icps", "evidence", "assumptions", "limits",
              "disconfirming", "channels", "budget_plan",
              "weeks", "copy", "experiments", "risks", "kill_criteria", "next_action"},
@@ -45,7 +45,7 @@ SNAPSHOT_KEYS = ("problem", "promise", "stage", "pricing", "cta", "differentiati
 
 STRINGS = {
     "en": {
-        "title": "Argus", "mode": "Mode", "market": "Market", "accessed": "Accessed on",
+        "title": "Argus", "mode": "Mode", "market": "Market", "accessed": "Accessed on", "product_url": "Product URL",
         "mode_live": "live (web research)", "mode_hypothesis-only": "hypothesis-only",
         "banner": "Nothing in this report is verified. Treat every claim as a hypothesis and check it before acting.",
         "na": "Not provided", "verdict": "Verdict", "uncertainty": "Biggest uncertainty",
@@ -73,7 +73,7 @@ STRINGS = {
         "footer": "Drafts only. Nothing was posted or sent. Re-read each community's current rules before posting.",
     },
     "tr": {
-        "title": "Argus", "mode": "Mod", "market": "Pazar", "accessed": "Erişim tarihi",
+        "title": "Argus", "mode": "Mod", "market": "Pazar", "accessed": "Erişim tarihi", "product_url": "Ürün URL'si",
         "mode_live": "canlı (web araştırması)", "mode_hypothesis-only": "yalnızca hipotez",
         "banner": "Bu raporda hiçbir şey doğrulanmadı. Her iddiayı hipotez say ve harekete geçmeden önce kontrol et.",
         "na": "Belirtilmedi", "verdict": "Karar", "uncertainty": "En büyük belirsizlik",
@@ -190,6 +190,11 @@ def validate(data):
     mode = data.get("research_mode")
     if mode not in MODES:
         problems.append("research_mode must be live or hypothesis-only")
+    if "product_url" in data and not _url(data["product_url"]):
+        problems.append("product_url must be an http(s) URL")
+    if mode == "live" and not _url(data.get("product_url")):
+        problems.append("research_mode live requires product_url, the http(s) URL the user gave. "
+                        "No URL from the user means no research: use hypothesis-only")
     if "language" in data and data["language"] not in LANGS:
         problems.append("language must be one of: " + ", ".join(LANGS))
     if "accessed_on" in data and not _date(data["accessed_on"]):
@@ -417,6 +422,9 @@ def render(data, lang=None):
     out = [f'# {t["title"]} — {inline(data["product_name"])}', '',
            f'**{t["mode"]}:** {t["mode_" + mode]}  ',
            f'**{t["market"]}:** {inline(data.get("market") or t["na"])}']
+    if data.get("product_url"):
+        out[-1] += '  '
+        out.append(f'**{t["product_url"]}:** <{data["product_url"]}>')
     if data.get("accessed_on"):
         out[-1] += '  '
         out.append(f'**{t["accessed"]}:** {data["accessed_on"]}')
@@ -722,6 +730,9 @@ def render_html(data, lang=None):
 
     chips = f'<span class="chip">{e(t["mode"])}: <b>{e(t["mode_" + mode])}</b></span>'
     chips += f'<span class="chip">{e(t["market"])}: <b>{e(data.get("market") or t["na"])}</b></span>'
+    if data.get("product_url"):
+        chips += (f'<span class="chip">{e(t["product_url"])}: <b><a href="{e(data["product_url"])}" '
+                  f'rel="noopener noreferrer nofollow">{e(data["product_url"])}</a></b></span>')
     if data.get("accessed_on"):
         chips += f'<span class="chip">{e(t["accessed"])}: <b>{e(data["accessed_on"])}</b></span>'
     banner = f'<div class="banner">⚠ {e(t["banner"])}</div>' if mode == "hypothesis-only" else ''

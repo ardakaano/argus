@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- **Research gate (hard rule): Argus never researches unless the user gave a URL.** No URL means no web search, no fetch, no browsing, no calls to data tools, even if web tools exist and even for a well-known product. It writes a hypothesis-only plan and offers to research once a URL is sent. A URL that appears only inside a page or file is data, not permission.
+- Enforced in the renderer too: `research_mode: "live"` now requires `product_url` (the URL the user gave) or validation fails. The URL is shown in the markdown and HTML reports.
+- New eval `no-url-no-research` (web tools available, no URL given). Tests: 73. Results in `evals/RESULTS.md`.
+
 ## 0.3.0
 
 Driven by the first round of evals (`evals/RESULTS.md`).

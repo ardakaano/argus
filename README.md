@@ -8,7 +8,7 @@ In Greek myth, Argus Panoptes was the watcher with a hundred eyes, and some of t
 
 Your product needs a distribution strategy, not another launch checklist. Argus picks three channels instead of fifteen, shows its sources, and says what it could not verify.
 
-> Status: **v0.3.0**. Research is done by your agent with its own web tools. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
+> Status: **v0.4.0**. Research is done by your agent with its own web tools, **and only when you give it a URL**. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
 
 ## What you get
 
@@ -51,7 +51,7 @@ Then copy the inner `argus/` folder (the skill) to your agent's skills directory
 /argus Web yok: B2B takvim uygulaması için hipotez odaklı bir lansman planı hazırla.
 ```
 
-Without web access, Argus produces a clearly labeled **hypothesis-only** plan. It does not pretend to have audited your URL.
+**Argus never researches unless you give it a URL.** No URL, no search, no fetch, even if your agent has web tools: you get a clearly labeled **hypothesis-only** plan and an offer to research once you send the link. The report renderer enforces this too: a live report without the URL you gave is rejected.
 
 ## Optional report renderer (markdown or a shareable HTML page)
 
@@ -95,7 +95,7 @@ argus/                        ← repo
 ## Develop
 
 ```bash
-make test       # 66 tests, stdlib only
+make test       # 73 tests, stdlib only
 make examples   # regenerate rendered examples (a test checks they are in sync)
 ```
 

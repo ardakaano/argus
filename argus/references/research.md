@@ -1,6 +1,6 @@
 # Research protocol
 
-Use live browsing when available. Prefer original evidence: official product pages, official pricing, primary discussions, current platform guidelines, firsthand users. Mark secondary commentary as secondary.
+Do live research only when the user gave you a URL (see the research gate in `SKILL.md`); the product URL is the starting point. Without one, do no search or fetch at all. Prefer original evidence: official product pages, official pricing, primary discussions, current platform guidelines, firsthand users. Mark secondary commentary as secondary.
 
 ## Search patterns
 
@@ -38,7 +38,7 @@ Do not label a claim `verified` unless you saw reliable evidence yourself. Never
 
 Community rules, prices and rankings change. Re-read them on the day you plan to act, and show the access date in the report.
 
-## No browsing
+## No URL, or no browsing
 
 Set `research_mode` to `hypothesis-only` and keep the evidence ledger empty rather than manufacturing evidence. Hypotheses are still useful: they tell the user what to verify first.
 

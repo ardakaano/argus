@@ -12,6 +12,7 @@ Fields marked **required** cause an error if missing or invalid. Everything else
 |---|---|---|
 | `product_name` | string, **required** | |
 | `research_mode` | `"live"` \| `"hypothesis-only"`, **required** | `hypothesis-only` forbids evidence entries. |
+| `product_url` | http(s) URL | The URL the user gave. **Required when `research_mode` is `live`**: no URL from the user means no research. |
 | `accessed_on` | `YYYY-MM-DD` | Expected when `research_mode` is `live`. |
 | `language` | `"en"` \| `"tr"` | Heading language. `--lang` overrides it. Default `en`. |
 | `market` | string | |

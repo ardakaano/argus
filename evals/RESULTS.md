@@ -1,6 +1,6 @@
 # Eval results
 
-Four scenarios (`evals.json`), each run with the skill and without it. One run per cell, graded by the author, not blind. Treat the numbers as evidence of direction, not as statistics.
+Five scenarios (`evals.json`), each run with the skill and without it. One run per cell, graded by the author, not blind. Treat the numbers as evidence of direction, not as statistics.
 
 Runs: **baseline** (no skill), **v0.2.1** (the skill as first written), **v0.3.0** (after round 1 fixes), **final** (after round 2 fixes; only the scenarios noted were re-run).
 
@@ -56,6 +56,20 @@ Round 2 (v0.3.0 to final):
 - `promotion_allowed: 1` passed validation because `1 == True` in Python. A unit test caught it; fixed.
 - The "short" and "launch plan" conflict was still there; fixed (scenario 3 went from 2,214 words to 659).
 - HTML ledger: URLs wrapped mid-domain and dates broke across lines on real data. Fixed.
+
+## Round 3: the research gate (v0.4.0)
+
+Rule added: **never research unless the user gave a URL.** Tested both ways.
+
+| Scenario | Run | Web tool calls | Result |
+|---|---|---:|---|
+| 5 no URL, web tools available, a findable product name | baseline | 7 | Searched for the product, found its site by itself, read it and competitor pricing |
+| | v0.4.0 | **0** | Quick hypothesis-only plan; said at the top that no URL was given so nothing was researched; ended with "Send your product URL and I'll research it live"; also left alone a data tool tied to the product |
+| 1 URL given | v0.4.0 | 23 | Research ran normally; `findings.json` has `product_url` and passes `--check --strict` |
+
+So the gate blocks research without a URL and does not get in the way when one is given. The tool-call counts are the agents' own reports (I cannot see their transcripts); they match the contents of the reports.
+
+Open point from the URL run: nothing caps how many pages to read (23 calls), and `promotion_allowed` has no value for "rules read, poor fit".
 
 ## Caveats
 

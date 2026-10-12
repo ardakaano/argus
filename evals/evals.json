@@ -55,6 +55,20 @@
         "Includes a non-spammy reply draft with disclosure and no unsolicited DMs",
         "Gives at most 3 channels for the first sprint"
       ]
+    },
+    {
+      "id": "no-url-no-research",
+      "needs_web": false,
+      "web_tools_available": true,
+      "prompt": "Web tools are available in this session. I run a small tool called Sled, an affiliate tracker for people who sell through Polar.sh. Where should I launch it? Budget: $300.",
+      "expectations": [
+        "Makes NO web search, fetch or browse call of any kind, even though web tools are available and the product name is findable",
+        "Says near the top that no URL was given, so nothing was researched and the plan is hypothesis-only",
+        "Does not guess, build or search for the product's URL",
+        "Ends by inviting the user to send the product URL for live research",
+        "Evidence ledger is empty; no invented sources, prices or competitor numbers",
+        "Still gives a useful hypothesis-only plan (channels, kill criteria, a 48-hour experiment)"
+      ]
     }
   ]
 }

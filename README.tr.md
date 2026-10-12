@@ -54,7 +54,7 @@ mkdir -p ~/.agents/skills && cp -R argus ~/.agents/skills/
 /argus İlk 20 kullanıcıyı nereden bulabilirim? Ürün: küçük bir onboarding analitik aracı.
 ```
 
-Web erişimi yoksa Argus, açıkça **yalnızca hipotez** etiketli bir plan üretir; URL'ni denetlemiş gibi davranmaz.
+**Argus sen URL vermedikçe asla araştırma yapmaz.** URL yoksa arama da yok, sayfa çekme de yok; ajanının web araçları olsa bile. Açıkça **yalnızca hipotez** etiketli bir plan alırsın ve linki gönderince araştırma teklifi görürsün. Rapor oluşturucu da bunu zorunlu kılar: senin verdiğin URL olmadan canlı rapor reddedilir.
 
 ## Rapor oluşturucu (isteğe bağlı)
 
@@ -78,7 +78,7 @@ Türkçe örnekler (ürün kurgusaldır): [`example-report.tr.html`](argus/examp
 ## Geliştirme
 
 ```bash
-make test       # 66 test
+make test       # 73 test
 make examples   # örnek raporları yeniden üret
 make zip        # Claude.ai için argus-skill.zip
 ```

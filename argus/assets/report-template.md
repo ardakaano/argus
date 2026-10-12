@@ -1,6 +1,7 @@
 # Argus — {{product_name}}
 
 **Mode:** live / hypothesis-only
+**Product URL:** {{url}} (the one the user gave; required for live mode)
 **Market:** {{market}}
 **Accessed on:** {{date}} (live mode only; omit when hypothesis-only)
 

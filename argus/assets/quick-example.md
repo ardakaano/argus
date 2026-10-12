@@ -4,7 +4,7 @@ A fictional example of a Quick-mode reply (about 400 words). Match the **shape**
 
 ---
 
-**Mode:** hypothesis-only (no web access). Everything below is unverified.
+**Mode:** hypothesis-only. You gave no URL, so nothing was researched and everything below is unverified.
 
 ## Verdict
 Start with five conversations and one design-partner team, not with a public launch. Your first 20 users are more likely to come from people one step away from you than from a broadcast.
@@ -32,4 +32,4 @@ Ask 5 freelancers you know for a 10-minute chat about how they chase late paymen
 ## Draft post (not sent; you approve it first)
 > I kept losing track of which clients I'd already reminded about invoices, so I built a small tool for it. It's early and rough. I'd like 5 freelancers to try it and tell me what's missing.
 
-Want the full 30-day plan, five experiments and a shareable report page?
+Want the full 30-day plan, five experiments and a shareable report page? Send your product URL and I'll research it live.

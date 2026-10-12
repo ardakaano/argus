@@ -35,12 +35,12 @@ Platformunu seç:
 Kurduktan sonra şunu gönder:
 
 ```text
-Argus: küçük bir alışkanlık takip uygulaması için hızlı bir lansman planı çıkar. Web erişimin yok.
+Argus: küçük bir alışkanlık takip uygulaması için hızlı bir lansman planı çıkar.
 ```
 
 Skill çalışıyorsa cevap:
 
-- en üstte **yalnızca hipotez** olduğunu (canlı araştırma yok) söyler,
+- en üstte, URL vermediğin için **yalnızca hipotez** olduğunu söyler ve URL gönderirsen araştırmayı teklif eder,
 - **kill criteria** ile bir **plana karşı** bölümü içerir,
 - **48 saatlik bir deney** ve "henüz gönderilmedi" diye işaretli bir taslak gönderi verir,
 - kaynak, fiyat ya da dönüşüm oranı uydurmaz.
@@ -208,7 +208,7 @@ python3 argus/scripts/render_report.py bulgular.json --lang tr -o plan.html
 
 ## Bilmekte fayda var
 
-- **Web erişimi** modu belirler. Varsa Argus araştırır ve tarihli kaynak gösterir. Yoksa bunu söyler ve yalnızca hipotez içeren bir plan verir.
+- **Argus yalnızca sen URL verirsen araştırır.** URL verirsen araştırır ve tarihli kaynak gösterir. Vermezsen, ajanının web araçları olsa bile hiç arama ya da sayfa çekme yapmaz; yalnızca hipotez içeren bir plan verir ve linki gönderirsen araştırmayı teklif eder.
 - **Quick veya Full**: kısa soruya kısa cevap verir. Tam sürüm için "plan", "denetim" ya da "30 günlük" iste.
 - **Senin yerine hiçbir şey gönderilmez.** Gönderi, e-posta ve DM'ler senin onayladığın taslaklardır.
 - **Dil**: yazdığın dilde cevap verir.

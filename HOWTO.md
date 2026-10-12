@@ -35,12 +35,12 @@ Pick your platform:
 After installing, send this:
 
 ```text
-Argus: give me a quick launch plan for a tiny habit-tracker app. You have no web access.
+Argus: give me a quick launch plan for a tiny habit-tracker app.
 ```
 
 The skill is working if the answer:
 
-- says near the top that it is **hypothesis-only** (no live research),
+- says near the top that it is **hypothesis-only** because you gave no URL, and offers to research if you send one,
 - has a section **against the plan** with **kill criteria**,
 - gives a **48-hour experiment** and a draft post marked as not yet sent,
 - does not invent sources, prices or conversion numbers.
@@ -208,7 +208,7 @@ python3 argus/scripts/render_report.py findings.json -o plan.html
 
 ## Good to know
 
-- **Web access** decides the mode. With it, Argus researches and cites sources with dates. Without it, it says so and gives a hypothesis-only plan.
+- **Argus researches only when you give it a URL.** With your URL it researches and cites sources with dates. Without one it does no search or fetch at all, even if your agent has web tools, and gives a hypothesis-only plan with an offer to research once you send the link.
 - **Quick or Full**: a short question gets a short answer. Ask for a "plan", "audit" or "30-day" for the full version.
 - **Nothing is sent for you.** Posts, emails and DMs are drafts you approve.
 - **Language**: it answers in the language you write in.
