@@ -1,0 +1,179 @@
+{
+  "product_name": "Zeytin Takvim",
+  "research_mode": "hypothesis-only",
+  "language": "tr",
+  "market": "Türkiye'deki serbest çalışan danışmanlar ve küçük ajanslar",
+  "summary": "Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların hafif bir takvim aracına ödeme yapıp yapmayacağı doğrulanmadan dağıtıma yatırım yapma. İlk iki hafta konuşma ve topluluklarda faydalı olma üzerine kur.",
+  "biggest_uncertainty": "Danışmanlar zaten ücretsiz bir randevu aracından memnun olabilir.",
+  "snapshot": {
+    "problem": "Birden fazla takvim kullanan danışmanlar çift rezervasyon yaşıyor.",
+    "promise": "Tüm takvimlerini tek bağlantıda birleştir, çakışma olmasın.",
+    "stage": "Prototip",
+    "pricing": "Belirlenmedi",
+    "cta": "Bekleme listesine katıl"
+  },
+  "icps": [
+    {
+      "name": "Birden fazla müşteriye hizmet veren serbest danışman",
+      "primary": true,
+      "job_to_be_done": "Müşteri toplantılarını çakışmadan planlamak",
+      "trigger": "Çift rezervasyon yüzünden bir müşteriyi kaçırmak",
+      "alternatives": "Ücretsiz randevu araçları, e-posta, WhatsApp",
+      "objections": "Zaten ücretsiz bir araç kullanıyorum"
+    }
+  ],
+  "evidence": [],
+  "disconfirming": [
+    "Ücretsiz randevu araçları çoğu danışman için yeterli olabilir."
+  ],
+  "channels": [
+    {
+      "name": "Meslek toplulukları (katılım odaklı)",
+      "scores": {
+        "icp_fit": 4,
+        "intent": 3,
+        "reachability": 3,
+        "speed": 4,
+        "cost": 5,
+        "effort": 3,
+        "risk": 3
+      },
+      "rationale": "Hedef kitleyle hızlı niteliksel geri bildirim.",
+      "effort": "Orta",
+      "rule": "Her topluluğun güncel tanıtım kuralını kontrol et",
+      "promotion_allowed": true,
+      "basis": "assumption"
+    },
+    {
+      "name": "Doğrudan görüşmeler",
+      "scores": {
+        "icp_fit": 5,
+        "intent": 3,
+        "reachability": 3,
+        "speed": 5,
+        "cost": 5,
+        "effort": 3,
+        "risk": 5
+      },
+      "rationale": "En hızlı sinyal; ölçeklenmez ama problemi kanıtlar.",
+      "effort": "Orta",
+      "rule": "İzinsiz toplu mesaj yok",
+      "promotion_allowed": true,
+      "basis": "assumption"
+    },
+    {
+      "name": "Arama odaklı içerik",
+      "scores": {
+        "icp_fit": 3,
+        "intent": 4,
+        "reachability": 3,
+        "speed": 2,
+        "cost": 5,
+        "effort": 2,
+        "risk": 5
+      },
+      "rationale": "Zamanla birikir ama doğrulaması yavaş.",
+      "effort": "Yüksek",
+      "rule": "Yok",
+      "promotion_allowed": true,
+      "basis": "assumption"
+    }
+  ],
+  "weeks": [
+    {
+      "week": 1,
+      "objective": "Acıyı doğrula",
+      "actions": [
+        "Beş danışmanla 15 dakikalık görüşme yap"
+      ],
+      "signal": "Beşten üçü sorun sormadan çift rezervasyondan bahsediyor",
+      "gate": "İkiden azı doğrularsa ICP'yi değiştir"
+    },
+    {
+      "week": 2,
+      "objective": "İlk iki kanalı dene",
+      "actions": [
+        "Bir toplulukta faydalı bir yazı paylaş",
+        "Üç kişiye demo göster"
+      ],
+      "signal": "Nitelikli yanıtlar",
+      "gate": "Yanıt yoksa mesajı değiştir"
+    },
+    {
+      "week": 3,
+      "objective": "Kontrol noktası",
+      "actions": [
+        "Demoda görülen sürtünmeyi azalt"
+      ],
+      "signal": "Denemeye başlayanlar",
+      "gate": "Üçüncü kanalı yalnızca sinyal varsa ekle"
+    },
+    {
+      "week": 4,
+      "objective": "Karar",
+      "actions": [
+        "Kanalları karşılaştır",
+        "Zayıf deneyleri durdur"
+      ],
+      "signal": "Bir kanal belirgin önde",
+      "gate": "Sinyal yoksa durup ICP'yi yeniden düşün"
+    }
+  ],
+  "copy": {
+    "positioning": "Birden fazla takvimi olan serbest danışmanlar için Zeytin Takvim, çift rezervasyonu bitiren hafif bir takvim birleştiricidir.",
+    "hooks": [
+      "Aynı saate iki müşteri vermeyi bırak.",
+      "Tüm takvimlerin tek bağlantıda, çakışma yok.",
+      "Randevu aracı değil, çakışma kalkanı."
+    ],
+    "launch_post": "Çift rezervasyondan bıkıp küçük bir araç yapıyorum.\nHenüz prototip aşamasında. Denemek isteyen beş danışman arıyorum.",
+    "reply_draft": "Ben de bu sorunu yaşadım. Şu an hangi takvimleri kullanıyorsun? (Not: Bu alanda küçük bir araç geliştiriyorum.)"
+  },
+  "experiments": [
+    {
+      "hypothesis": "Danışmanlar çift rezervasyonu gerçek bir sorun olarak anlatır",
+      "channel": "Doğrudan görüşme",
+      "test": "Beş kısa görüşme",
+      "kpi": "Sorunu kendiliğinden anlatanlar",
+      "decision_gate": "Önerilen: 5'te 3 devam, 2'den azı ICP değişimi",
+      "within_48h": true
+    },
+    {
+      "hypothesis": "'Çift rezervasyonu bitir' vaadi 'tek bağlantı' vaadinden daha çok tıklanır",
+      "channel": "Bekleme listesi sayfası",
+      "test": "İki başlığı bekleme listesine gelen ziyaretçilere göster",
+      "kpi": "Başlık başına kayıt oranı",
+      "decision_gate": "Önerilen: varyant başına 100 ziyaretçi sonrası net fark karar verir"
+    },
+    {
+      "hypothesis": "Faydalı bir topluluk yazısı nitelikli konuşma getirir",
+      "channel": "Meslek toplulukları",
+      "test": "İzin verilen yerde bir eğitici yazı paylaş, tüm yorumlara yanıt ver",
+      "kpi": "Yazı başına nitelikli konuşma",
+      "decision_gate": "Önerilen: 3 nitelikli konuşma kanalı sürdürür"
+    },
+    {
+      "hypothesis": "Elle kurulum denemeye başlayanların ilk değere ulaşmasını artırır",
+      "channel": "Deneme kullanıcıları",
+      "test": "İzinli deneyicilere birebir kurulum yap, kendi kurulumlarıyla karşılaştır",
+      "kpi": "İlk çakışma engelleme oranı",
+      "decision_gate": "Önerilen: 10 deneyici sonrası gözden geçir"
+    },
+    {
+      "hypothesis": "Danışmanlar ürün bitmeden ödemeyi taahhüt eder",
+      "channel": "Deneme kullanıcıları",
+      "test": "Aktif deneyicilere kurucu üye fiyatı öner",
+      "kpi": "Taahhüt edenler",
+      "decision_gate": "Önerilen: 10 aktif deneyiciden 2'si taahhüt eder",
+      "budget_usd": 0
+    }
+  ],
+  "risks": [
+    "Ücretsiz araçlar yeterli olabilir",
+    "Topluluklar tanıtımı yasaklayabilir"
+  ],
+  "kill_criteria": [
+    "10 görüşmenin 3'ünden azı sorunu doğrularsa dur"
+  ],
+  "next_action": "48 saat içinde tanıdığın beş danışmana yazıp 15 dakikalık görüşme iste."
+}

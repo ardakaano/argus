@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+argus-skill.zip
+.DS_Store

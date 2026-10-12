@@ -1,0 +1,64 @@
+{
+  "product_name": "FormNest",
+  "research_mode": "hypothesis-only",
+  "language": "en",
+  "market": "English-speaking solo SaaS founders",
+  "summary": "Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-app feedback widget before spending anything on distribution. Start with participation-first founder communities, because they are free and give feedback within days.",
+  "biggest_uncertainty": "Founders may already be 'good enough' with a free form or a shared inbox, which would make the pain real but unpaid.",
+  "snapshot": {
+    "problem": "Small SaaS teams hear about problems late, because feedback tools are heavy to set up.",
+    "promise": "Collect meaningful in-app feedback in minutes, without a heavyweight tool.",
+    "stage": "Private beta",
+    "pricing": "Not set",
+    "cta": "Join the beta",
+    "differentiation": "Setup time measured in minutes, not days."
+  },
+  "icps": [
+    {"name": "Solo SaaS founder with 50-500 users", "primary": true, "job_to_be_done": "Learn why users churn or get stuck without running surveys by hand", "trigger": "A churn spike or a support thread that reveals a missing feature", "alternatives": "Email, Typeform, a shared inbox, a free feedback board", "objections": "One more script on my site; I can ask users by email"},
+    {"name": "Product-minded developer at a 3-10 person startup", "primary": false, "job_to_be_done": "Give the team a lightweight channel for user voice", "trigger": "First hire in support or product", "alternatives": "Intercom, Canny, internal Slack channel", "objections": "We already pay for a support tool"}
+  ],
+  "evidence": [],
+  "disconfirming": [
+    "Free alternatives (a form plus a spreadsheet) may be good enough for most solo founders.",
+    "Open question: do founders at this size act on in-app feedback, or does their volume stay too low for a tool to matter?"
+  ],
+  "channels": [
+    {"name": "Founder communities (participation-first)", "scores": {"icp_fit": 4, "intent": 3, "reachability": 4, "speed": 4, "cost": 5, "effort": 3, "risk": 3}, "rationale": "Fast qualitative feedback from the exact ICP, if the founder has standing.", "effort": "Medium: daily presence for two weeks", "rule": "Check each community's current promotion rules", "promotion_allowed": true, "basis": "assumption"},
+    {"name": "Content on collecting feedback", "scores": {"icp_fit": 4, "intent": 3, "reachability": 3, "speed": 2, "cost": 5, "effort": 2, "risk": 5}, "rationale": "Compounding search reach, but slow validation.", "effort": "High: one useful post per week", "rule": "None beyond honest disclosure", "promotion_allowed": true, "basis": "assumption"},
+    {"name": "Launch directories", "scores": {"icp_fit": 2, "intent": 2, "reachability": 3, "speed": 4, "cost": 4, "effort": 3, "risk": 4}, "rationale": "A spike of visits, mostly other makers, not buyers.", "effort": "Low", "rule": "Read each directory's guidelines", "promotion_allowed": true, "basis": "assumption"},
+    {"name": "Subreddit that bans tool promotion", "scores": {"icp_fit": 5, "intent": 4, "reachability": 3, "speed": 4, "cost": 5, "effort": 3, "risk": 1}, "rationale": "Great place to learn what people complain about.", "effort": "Low", "rule": "Hypothetical: rules prohibit self-promotion, so listen and help only", "promotion_allowed": false, "basis": "assumption"}
+  ],
+  "weeks": [
+    {"week": 1, "objective": "Confirm the pain and the promise", "actions": ["Hold five short conversations with target founders", "Draft two landing-page promises"], "signal": "At least 3 of 5 describe the pain without being prompted", "gate": "Fewer than 2 confirm: change the ICP before building more"},
+    {"week": 2, "objective": "Test the top two channels", "actions": ["Share one useful post where allowed", "Run five opt-in demos"], "signal": "Qualified replies or demo requests", "gate": "No qualified replies after a fair attempt: change the message, not the volume"},
+    {"week": 3, "objective": "Checkpoint, then activation", "actions": ["Simplify installation based on demo friction", "Follow up with consenting testers"], "signal": "Testers reach their first feedback", "gate": "Add channel #3 only if one channel produced signal"},
+    {"week": 4, "objective": "Decide", "actions": ["Compare activation by channel", "Stop weak experiments"], "signal": "One channel clearly outperforms", "gate": "No channel has signal: pause and revisit the ICP"}
+  ],
+  "copy": {
+    "positioning": "For solo SaaS founders who learn about problems too late, FormNest is a lightweight feedback widget that installs in minutes, unlike heavy tools that need a sprint to set up.",
+    "hooks": [
+      "You find out why users left three weeks after they left.",
+      "Hear from users inside your app, with five minutes of setup.",
+      "Not another feedback suite: one widget, one inbox."
+    ],
+    "launch_post": "I built FormNest, a small feedback widget for solo SaaS apps.\nIt's in private beta and still rough around onboarding.\nI'm looking for 5 founders who'd try it and tell me what's missing.",
+    "reply_draft": "The trade-off with feedback tools is usually setup time versus workflow depth. What matters most for your app right now? (Disclosure: I'm building a small tool in this space.)"
+  },
+  "experiments": [
+    {"hypothesis": "Target founders describe late feedback as a real pain without prompting", "channel": "Direct conversations", "test": "Five 15-minute calls with founders found in communities where they already talk about the topic", "kpi": "Calls where the pain is raised unprompted", "decision_gate": "Proposed: 3 of 5 continue, fewer than 2 means change the ICP", "within_48h": true},
+    {"hypothesis": "Promise A ('know why users leave') beats promise B ('five-minute setup')", "channel": "Landing page", "test": "Two headlines shown to opt-in beta visitors", "kpi": "Beta sign-up rate per headline", "decision_gate": "Proposed: review after 100 visitors per variant; a clear gap decides"},
+    {"hypothesis": "A useful founder-community post produces qualified conversations", "channel": "Founder communities", "test": "One educational post where allowed, then reply to every comment", "kpi": "Qualified conversations per post", "decision_gate": "Proposed: 3 qualified conversations continues the channel"},
+    {"hypothesis": "Shorter setup increases activation", "channel": "Beta onboarding", "test": "Compare the current onboarding with a concierge setup for opt-in testers", "kpi": "Install to first feedback rate", "decision_gate": "Proposed: review after 15 qualified installs"},
+    {"hypothesis": "Founders will commit to pay before the product is finished", "channel": "Beta testers", "test": "Offer a discounted founding-member price to active testers", "kpi": "Testers who commit", "decision_gate": "Proposed: 2 of 10 active testers commit", "budget_usd": 0}
+  ],
+  "risks": [
+    "The problem may be too low priority for solo founders.",
+    "Distribution channels may prohibit promotion.",
+    "Free alternatives may be good enough."
+  ],
+  "kill_criteria": [
+    "Fewer than 3 of 10 target conversations confirm the pain unprompted.",
+    "Zero qualified replies from the top two channels after a fair attempt."
+  ],
+  "next_action": "Within 48 hours, message five founders you already know and ask for a 15-minute call about how they collect feedback today."
+}
