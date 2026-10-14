@@ -71,7 +71,7 @@ So the gate blocks research without a URL and does not get in the way when one i
 
 Open points from the URL run were a page limit (nothing capped the 23 calls) and no way to flag a poor audience fit. Round 4 added both: a limit in `SKILL.md` and a renderer note for a weak `icp_fit` in a validation slot.
 
-## Round 4: review of the whole skill (unreleased)
+## Round 4: review of the whole skill (v0.4.1)
 
 The skill was restructured and its contradictions fixed (see the changelog). Six scenarios were run on a snapshot of the folder, one fresh agent each, **with the skill only** (no baseline this round). Each agent was also asked to list instructions that were unclear or contradictory.
 

@@ -5,7 +5,7 @@ license: MIT
 compatibility: Live research happens only when the user supplies a product URL and web tools exist. Optional Python 3.10+ script uses only the standard library. Works in read-only conversational mode without shell access.
 metadata:
   author: Arda Kaan Özcan
-  version: "0.4.0"
+  version: "0.4.1"
 ---
 
 # Argus

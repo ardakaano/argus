@@ -8,7 +8,7 @@ In Greek myth, Argus Panoptes was the watcher with a hundred eyes, and some of t
 
 Your product needs a distribution strategy, not another launch checklist. Argus picks three channels instead of fifteen, shows its sources, and says what it could not verify.
 
-> Status: **v0.4.0**. Research is done by your agent with its own web tools, **and only when you give it a URL**. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
+> Status: **v0.4.1**. Research is done by your agent with its own web tools, **and only when you give it a URL**. This repo has no crawler, no community-discovery API and no posting automation. The optional script only validates and renders JSON. 🇹🇷 [Türkçe README](README.tr.md)
 
 ## What you get
 

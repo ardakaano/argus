@@ -6,7 +6,7 @@
   },
   "id": "argus",
   "name": "Argus",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "MIT",
   "author": {
     "name": "Arda Kaan Özcan",
@@ -790,7 +790,7 @@
   ],
   "changelog": [
     {
-      "version": "Unreleased"
+      "version": "0.4.1"
     },
     {
       "version": "0.4.0"
@@ -813,7 +813,7 @@
       "path": "argus/SKILL.md",
       "role": "instructions",
       "bytes": 16152,
-      "sha256": "41ef1825b4552f9446dccd3e36c003b7af8718869456eb07ba57995570f8f6bb",
+      "sha256": "a802455df3fcb7f9d5660257c2fe12009730f6416419a2ab73bb63c84e1e2f1d",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/SKILL.md"
     },
     {

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.1
 
 Skill review: fixes and gaps found by reading every file, fuzzing the renderer, and running the skill through six fresh-agent scenarios (`evals/RESULTS.md`, round 4).
 
@@ -11,8 +11,6 @@ Skill review: fixes and gaps found by reading every file, fuzzing the renderer, 
 - **Examples.** The English example's experiments and week 1 relied on "Direct conversations", which was missing from its channel table, while "Launch directories" (described as "mostly other makers, not buyers") held a validation slot. Added the channel; reports and site JSON regenerated.
 - **Docs.** The description is 587 characters, not "about 490" (HOWTO, HOWTO.tr, `platforms.md`, site JSON); a test now keeps the stated figure current, and the site JSON computes it. `evals/README.md` and both READMEs said four scenarios when there were five; now eight, three of them new (`quick-url-limited-research`, `pasted-page-no-ledger`, `language-without-renderer-support`).
 - **Tests.** 93 (from 81): text-field validation, weak-fit note, UTF-8 streams, documented description length, body size limit, eval file consistency.
-- Version stays 0.4.0 until you release.
-
 - `site/argus.json` (everything about the skill for a website: bilingual texts, six platform install guides, features, rules, FAQ, evals summary, changelog, every skill file with SHA-256, a ready system prompt) and `site/argus.lite.json` (no file contents). Built by `site/build_site_json.py` (`make site`); tests check they are current, complete, bilingual and free of private paths.
 
 ## 0.4.0
