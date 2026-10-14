@@ -1,7 +1,7 @@
 SKILL := argus
 RENDER := python3 $(SKILL)/scripts/render_report.py
 
-.PHONY: test examples logo zip clean
+.PHONY: test examples logo site zip clean
 
 test:
 	python3 -m unittest discover -s tests -v
@@ -12,6 +12,10 @@ examples:
 	$(RENDER) $(SKILL)/examples/example-output.tr.json -o $(SKILL)/examples/example-report.tr.md
 	$(RENDER) $(SKILL)/examples/example-output.json -o $(SKILL)/examples/example-report.html
 	$(RENDER) $(SKILL)/examples/example-output.tr.json -o $(SKILL)/examples/example-report.tr.html
+
+# Regenerate site/argus.json and site/argus.lite.json (a test checks they are current).
+site:
+	python3 site/build_site_json.py
 
 # Regenerate the logo SVGs (the PNG banner is rendered from the SVG with a browser).
 logo:

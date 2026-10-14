@@ -73,7 +73,7 @@ Samples (the product is fictional): [`example-report.html`](argus/examples/examp
 
 ## Does it work? Evals
 
-Skills should be tested, not just written. [`evals/`](evals/README.md) has four behavioural scenarios (live URL audit, no-web hypothesis mode, a prompt-injection page, a Turkish request about a forum that bans promotion), run with and without the skill. Results and what they changed are in [`evals/RESULTS.md`](evals/RESULTS.md).
+Skills should be tested, not just written. [`evals/`](evals/README.md) has eight behavioural scenarios (live URL audit, no-web hypothesis mode, a prompt-injection page, a Turkish request about a forum that bans promotion, no URL with web tools available, a Quick answer with a URL, a pasted page, a language the renderer has no headings for). The first five were run with and without the skill, the last three with the skill only. Results and what they changed are in [`evals/RESULTS.md`](evals/RESULTS.md).
 
 ## Layout
 
@@ -92,10 +92,14 @@ argus/                        ← repo
 └── .github/workflows/test.yml
 ```
 
+## Use it on a website
+
+[`site/argus.json`](site/argus.json) holds everything about the skill in one file (texts in English and Turkish, install steps for six platforms, the full skill files with SHA-256, a ready system prompt). [`site/argus.lite.json`](site/argus.lite.json) is the same without file contents, enough to render pages. Both are generated: `make site`, and a test fails if they go stale.
+
 ## Develop
 
 ```bash
-make test       # 73 tests, stdlib only
+make test       # 93 tests, stdlib only
 make examples   # regenerate rendered examples (a test checks they are in sync)
 ```
 

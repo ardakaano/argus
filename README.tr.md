@@ -73,12 +73,16 @@ Türkçe örnekler (ürün kurgusaldır): [`example-report.tr.html`](argus/examp
 
 ## Çalışıyor mu? Eval'ler
 
-[`evals/`](evals/README.md) altında dört davranış senaryosu var: canlı URL denetimi, web'siz hipotez modu, prompt-injection içeren bir sayfa ve tanıtımı yasaklayan forumla ilgili Türkçe bir istek. Her biri skill'li ve skill'siz koşturuldu. Sonuçlar: [`evals/RESULTS.md`](evals/RESULTS.md).
+[`evals/`](evals/README.md) altında sekiz davranış senaryosu var: canlı URL denetimi, web'siz hipotez modu, prompt-injection içeren bir sayfa, tanıtımı yasaklayan forumla ilgili Türkçe bir istek, web araçları açıkken URL verilmemesi, URL'li Quick cevap, yapıştırılmış sayfa ve renderer'ın başlık desteklemediği bir dil. İlk beşi skill'li ve skill'siz, son üçü yalnızca skill'li koşturuldu. Sonuçlar: [`evals/RESULTS.md`](evals/RESULTS.md).
+
+## Web sitende kullan
+
+[`site/argus.json`](site/argus.json) skill hakkında her şeyi tek dosyada tutar (İngilizce ve Türkçe metinler, altı platform için kurulum adımları, SHA-256'lı tüm skill dosyaları, hazır system prompt). [`site/argus.lite.json`](site/argus.lite.json) aynısı ama dosya içerikleri olmadan, sayfa üretmeye yeter. İkisi de üretilir: `make site`; bayatlarsa test başarısız olur.
 
 ## Geliştirme
 
 ```bash
-make test       # 73 test
+make test       # 93 test
 make examples   # örnek raporları yeniden üret
 make zip        # Claude.ai için argus-skill.zip
 ```

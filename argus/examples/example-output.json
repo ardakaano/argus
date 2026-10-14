@@ -49,6 +49,23 @@
   ],
   "channels": [
     {
+      "name": "Direct conversations with founders you know",
+      "scores": {
+        "icp_fit": 5,
+        "intent": 3,
+        "reachability": 5,
+        "speed": 5,
+        "cost": 5,
+        "effort": 4,
+        "risk": 5
+      },
+      "rationale": "Fastest signal and the cheapest proof of the pain; it does not scale.",
+      "effort": "Low: five calls in week 1",
+      "rule": "One-to-one only, no bulk messages; say who you are and make saying no easy",
+      "promotion_allowed": true,
+      "basis": "assumption"
+    },
+    {
       "name": "Founder communities (participation-first)",
       "scores": {
         "icp_fit": 4,

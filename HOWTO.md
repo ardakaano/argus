@@ -192,7 +192,7 @@ Use my Argus skill to audit https://example.com for indie SaaS founders, $300 bu
 
 **Update**: upload the new ZIP. **Remove**: open the skill, switch it off, then use "..." > Delete. If you use Claude Code with the same account, enabled skills sync there too.
 
-**If the upload fails**: the help center lists these causes: ZIP too large, folder name not matching the skill name, missing `SKILL.md`, invalid characters in the name or description. One thing to watch: Anthropic's "How to create custom skills" article still says descriptions are limited to 200 characters, while the Agent Skills spec allows 1024. Argus's description is about 490. If yours is rejected for length, shorten the `description` line in `SKILL.md` to about 200 characters and keep the Turkish trigger phrases.
+**If the upload fails**: the help center lists these causes: ZIP too large, folder name not matching the skill name, missing `SKILL.md`, invalid characters in the name or description. One thing to watch: Anthropic's "How to create custom skills" article still says descriptions are limited to 200 characters, while the Agent Skills spec allows 1024. Argus's description is about 590 characters. If yours is rejected for length, shorten the `description` line in `SKILL.md` to about 200 characters and keep the Turkish trigger phrases.
 
 ---
 

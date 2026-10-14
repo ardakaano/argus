@@ -28,7 +28,7 @@ This is the same as `round(20 * (0.25*icp_fit + 0.20*intent + 0.15*reachability 
 - If a community or platform **prohibits promotion**, set `promotion_allowed: false`. The channel can stay in the table as a place to learn and help, but not to post promotional content, whatever the score.
 - Validate the top two **fast** channels in weeks 1–2 (speed 3 or higher). A slow channel (speed 1–2, for example SEO content) never takes a validation slot, however well it scores: the renderer marks it "Background (slow payoff)". Promote the next fast channel only after the checkpoint. Do not run more than three at once.
 - If promotion rules are unknown or unreadable, set `promotion_allowed: "unknown"` (the renderer shows "Read the rules first") until you have read them, and say so in `rule`. `false` is for rules you know forbid promotion.
-- Check audience fit before the score: a community whose members are not the primary ICP gets a low `icp_fit`, whatever its rules or size.
+- Check audience fit before the score: a community whose members are not the primary ICP gets a low `icp_fit`, whatever its rules or size. A channel with `icp_fit` of 2 or less should not take a weeks 1-2 slot; the renderer prints a note when one does.
 - A fact the user reported (for example "the forum bans promotion") is not evidence you saw. Use `basis: assumption` for scores that depend on it unless you read the source.
 - For a venue category you could not look up (offline), score each dimension you cannot judge at 3 rather than guessing high or low.
 - With no live research, every score is an assumption. Say in the report that the scores are a rough ordering of hypotheses. The renderer adds this note in hypothesis-only mode.

@@ -6,7 +6,7 @@
 python3 scripts/render_report.py --template > findings.json
 ```
 
-Fields marked **required** cause an error if missing or invalid. Everything else is optional; gaps in the quality gate are reported as warnings (use `--strict` to make them errors).
+Fields marked **required** cause an error if missing or invalid. Everything else is optional; gaps in the quality gate are reported as warnings (use `--strict` to make them errors). Every free-text field below (`snapshot.*`, `icps[].alternatives`, `channels[].rationale`, `copy.launch_post`, and so on) must be a string or `null`: a list or object is an error, so join several items with `"; "`.
 
 | Field | Type | Notes |
 |---|---|---|
@@ -14,7 +14,7 @@ Fields marked **required** cause an error if missing or invalid. Everything else
 | `research_mode` | `"live"` \| `"hypothesis-only"`, **required** | `hypothesis-only` forbids evidence entries. |
 | `product_url` | http(s) URL | The URL the user gave. **Required when `research_mode` is `live`**: no URL from the user means no research. |
 | `accessed_on` | `YYYY-MM-DD` | Expected when `research_mode` is `live`. |
-| `language` | `"en"` \| `"tr"` | Heading language. `--lang` overrides it. Default `en`. |
+| `language` | `"en"` \| `"tr"` | Heading language. `--lang` overrides it. Default `en`. No other languages: for those, deliver the report in the chat and use the script only for `--check`. |
 | `market` | string | |
 | `summary` | string | The verdict. |
 | `biggest_uncertainty` | string | |
@@ -48,7 +48,7 @@ Channel roles: the top two promotable channels with `speed` of 3 or more are "Va
 
 ## Notes and warnings
 
-`note:` lines are information the renderer cannot make you clear (a channel's rules are unknown, a top channel rests on assumptions, fewer than two promotable channels can show a signal within weeks). They never fail `--strict`. `warning:` lines are quality-gate gaps you can always fix; `--strict` fails on them.
+`note:` lines are information the renderer cannot make you clear (a channel's rules are unknown, a top channel rests on assumptions, fewer than two promotable channels can show a signal within weeks, a "Validate now" channel has `icp_fit` of 2 or less so its audience may not be your ICP). They never fail `--strict`. `warning:` lines are quality-gate gaps you can always fix; `--strict` fails on them.
 
 Evidence you saw only in a search snippet or a summary: set `status: "inference"`, `source_type: "snippet"` or `"secondary"`, and leave `source_url` out unless you opened it.
 
@@ -61,5 +61,6 @@ Evidence you saw only in a search snippet or a summary: set `status: "inference"
 - No `disconfirming` entries or `kill_criteria`.
 - Live mode with no evidence, or without `accessed_on`.
 - Missing `next_action`.
+- An unknown field name (usually a typo), listed with the section it appears in.
 
 Text is placed in markdown tables and lists after newlines and pipes are neutralized. The renderer fetches nothing.

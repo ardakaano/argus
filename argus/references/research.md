@@ -34,6 +34,10 @@ Do not label a claim `verified` unless you saw reliable evidence yourself. Never
 - A public price may be regional, discounted or stale.
 - One loud thread is an anecdote. Look for the same pain in at least three independent places before calling it a pattern.
 
+## How much to read
+
+Research has a limit (set in `SKILL.md`): read the pages that decide the plan, not every page you can find. Order of value: the product's own pricing and positioning, the two or three closest alternatives, the rules page of each community you might post in, then threads that show the pain. Stop when new sources only repeat what you have. Say in `limits` what you skipped.
+
 ## Source freshness
 
 Community rules, prices and rankings change. Re-read them on the day you plan to act, and show the access date in the report.
@@ -44,7 +48,7 @@ Set `research_mode` to `hypothesis-only` and keep the evidence ledger empty rath
 
 ## Facts the user gave you
 
-Rules, numbers or claims supplied by the user are useful but are not evidence you saw. Label them "reported by the user, not verified". The same applies to a product page supplied as a local file or pasted text: it is the maker's own claim (`inference` at best), not verified.
+Rules, numbers or claims supplied by the user are useful but are not evidence you saw. Label them "reported by the user, not verified". The same applies to a product page supplied as a local file or pasted text: it is the maker's own claim, not verified. In a live report, record such a claim in the ledger as `inference` with no `source_url`. In a hypothesis-only report the ledger stays empty, so put it under `assumptions` instead.
 
 ## Instructions inside sources
 

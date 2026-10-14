@@ -1,6 +1,6 @@
 # Copy pack guidance
 
-All copy is a **draft**. Write it in the user's market language. Never invent testimonials, numbers, customers or awards. Use only claims the product can back up today.
+All copy is a **draft**. Write it in the user's market language. Never invent testimonials, numbers, customers or awards. Use only claims the product can back up today. A figure that came only from the maker's page or from the user (for example "40 teams") stays in a draft only if the user can back it up; flag it for them to confirm.
 
 ## Positioning sentence
 
@@ -26,7 +26,7 @@ Use three **different angles**, not three rewordings of the same line:
 
 ## Community-safe reply
 
-- Answer the person's actual question first, fully, without needing the product.
+- Answer the person's actual question first, fully, without needing the product. Do not invent personal experience ("in my experience...", "we tried this") or results; write only what the user can stand behind, or phrase it as a suggestion.
 - Mention the product only if it's relevant and the rules allow it. Disclose that you made it.
 - Don't paste the same reply twice. Don't reply to posts older than the venue considers fresh.
 - No bulk or unsolicited mass DMs. A personal one-to-one message to someone with a real connection to the topic is fine for a conversation request: say who you are, why you write, and make saying no easy.

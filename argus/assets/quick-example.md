@@ -17,7 +17,7 @@ Freelance designers who send 5+ invoices a month. Trigger: a client pays late an
 |---|---|---|---|
 | 1 | One-to-one chats with freelancers you know | Weeks 1-2 | Personal messages only, no bulk |
 | 2 | One design partner: a freelancer collective | Weeks 1-2 | Needs a member to introduce you |
-| 3 | A community's "show what you built" thread | After the week-2 checkpoint | Read its current rules first |
+| 3 | A community's "show what you built" thread | Read its rules first; after the week-2 checkpoint at the earliest | Rules unread, so it takes no slot yet |
 
 ## Against the plan
 - A spreadsheet may be good enough, so the pain could be real but unpaid.

@@ -192,7 +192,7 @@ Argus skill'imi kullanarak https://example.com adresini indie SaaS kurucuları i
 
 **Güncelleme**: yeni ZIP'i yükle. **Kaldırma**: skill'i aç, kapat, sonra "..." > Delete. Aynı hesapla Claude Code kullanıyorsan, açık skill'ler oraya da senkronlanır.
 
-**Yükleme hata verirse**: yardım merkezi şu nedenleri sayıyor: ZIP çok büyük, klasör adı skill adıyla uyuşmuyor, `SKILL.md` yok, ad veya açıklamada geçersiz karakter. Dikkat edilecek bir şey: Anthropic'in "How to create custom skills" yazısı description için hâlâ 200 karakter sınırı diyor, Agent Skills spec'i ise 1024 izin veriyor. Argus'un description'ı yaklaşık 490 karakter. Uzunluktan reddedilirse `SKILL.md` içindeki `description` satırını ~200 karaktere kısalt, Türkçe tetikleyicileri tut.
+**Yükleme hata verirse**: yardım merkezi şu nedenleri sayıyor: ZIP çok büyük, klasör adı skill adıyla uyuşmuyor, `SKILL.md` yok, ad veya açıklamada geçersiz karakter. Dikkat edilecek bir şey: Anthropic'in "How to create custom skills" yazısı description için hâlâ 200 karakter sınırı diyor, Agent Skills spec'i ise 1024 izin veriyor. Argus'un description'ı yaklaşık 590 karakter. Uzunluktan reddedilirse `SKILL.md` içindeki `description` satırını ~200 karaktere kısalt, Türkçe tetikleyicileri tut.
 
 ---
 

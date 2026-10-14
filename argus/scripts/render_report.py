@@ -23,6 +23,7 @@ CONFIDENCES = ("high", "medium", "low")
 BASES = ("evidence", "assumption")
 SOURCE_TYPES = ("primary", "secondary", "snippet")
 SLOW_SPEED = 2  # channels scoring this low or lower on speed cannot take a weeks 1-2 validation slot
+WEAK_FIT = 2  # a weeks 1-2 channel scoring this low or lower on icp_fit gets a note: the audience may be wrong
 
 KNOWN = {
     "root": {"product_name", "research_mode", "product_url", "accessed_on", "language", "market", "summary",
@@ -42,6 +43,16 @@ KNOWN = {
 EYE_ROWS = [(5, 9), (3, 11), (1, 13), (0, 14), (0, 14), (0, 14), (1, 13), (3, 11), (5, 9)]
 
 SNAPSHOT_KEYS = ("problem", "promise", "stage", "pricing", "cta", "differentiation")
+
+# Free-text fields that must be strings (null is the same as absent). A list or object here would print as a Python repr.
+TEXT_FIELDS = {
+    "icp": ("job_to_be_done", "trigger", "alternatives", "objections"),
+    "channel": ("rationale", "effort", "rule"),
+    "week": ("signal", "gate"),
+    "copy": ("positioning", "launch_post", "reply_draft", "outreach_draft"),
+    "experiment": ("channel", "test", "kpi", "decision_gate"),
+    "snapshot": SNAPSHOT_KEYS,
+}
 
 STRINGS = {
     "en": {
@@ -180,6 +191,12 @@ def _dict_items(data, key, problems):
     return out
 
 
+def _text_fields(obj, kind, label, problems):
+    for key in TEXT_FIELDS[kind]:
+        if obj.get(key) is not None and not isinstance(obj[key], str):
+            problems.append(f"{label}.{key} must be a string (join several items with '; ')")
+
+
 def validate(data):
     """Raise ValueError listing every structural problem found."""
     if not isinstance(data, dict):
@@ -207,10 +224,13 @@ def validate(data):
             problems.append(f"{key} must contain only strings")
     if "snapshot" in data and not isinstance(data["snapshot"], dict):
         problems.append("snapshot must be an object")
+    elif "snapshot" in data:
+        _text_fields(data["snapshot"], "snapshot", "snapshot", problems)
 
     evidence = _items(data, "evidence", problems)
     if mode == "hypothesis-only" and evidence:
-        problems.append("Hypothesis-only reports must not contain a verified evidence ledger")
+        problems.append("Hypothesis-only reports must have an empty evidence ledger "
+                        "(put what the user told you under assumptions)")
     elif mode == "live":
         for index, item in _dict_items(data, "evidence", problems):
             label = f"evidence[{index}]"
@@ -243,6 +263,7 @@ def validate(data):
             problems.append(f'{label}.promotion_allowed must be true, false or "unknown"')
         if "basis" in channel and channel["basis"] not in BASES:
             problems.append(f"{label}.basis must be one of: " + ", ".join(BASES))
+        _text_fields(channel, "channel", label, problems)
 
     for index, week in _dict_items(data, "weeks", problems):
         label = f"weeks[{index}]"
@@ -253,12 +274,14 @@ def validate(data):
         actions = week.get("actions", [])
         if not isinstance(actions, list) or not all(isinstance(a, str) for a in actions):
             problems.append(f"{label}.actions must be a list of strings")
+        _text_fields(week, "week", label, problems)
 
     for index, icp in _dict_items(data, "icps", problems):
         if not _text(icp.get("name")):
             problems.append(f"icps[{index}].name is required")
         if "primary" in icp and not isinstance(icp["primary"], bool):
             problems.append(f"icps[{index}].primary must be true or false")
+        _text_fields(icp, "icp", f"icps[{index}]", problems)
 
     for index, exp in _dict_items(data, "experiments", problems):
         label = f"experiments[{index}]"
@@ -271,12 +294,15 @@ def validate(data):
             problems.append(f"{label}.budget_usd must be a non-negative number")
         if "budget" in exp and not _text(exp["budget"]):
             problems.append(f"{label}.budget must be a non-empty string such as \"500 TL\"")
+        _text_fields(exp, "experiment", label, problems)
 
     copy = data.get("copy", {})
     if not isinstance(copy, dict):
         problems.append("copy must be an object")
-    elif not isinstance(copy.get("hooks", []), list) or not all(isinstance(h, str) for h in copy.get("hooks", [])):
-        problems.append("copy.hooks must be a list of strings")
+    else:
+        if not isinstance(copy.get("hooks", []), list) or not all(isinstance(h, str) for h in copy.get("hooks", [])):
+            problems.append("copy.hooks must be a list of strings")
+        _text_fields(copy, "copy", "copy", problems)
 
     if problems:
         raise ValueError("Invalid findings:\n" + "\n".join("- " + p for p in problems))
@@ -327,7 +353,6 @@ def lint(data):
     channels = data.get("channels", [])
     if not 2 <= len(channels) <= 8:
         warnings.append(f"Expected 2-8 scored channels, found {len(channels)}")
-    eligible = _eligible(_ranked(data))
     weeks = data.get("weeks", [])
     if len(weeks) != 4:
         warnings.append(f"Expected a 4-week sprint, found {len(weeks)} weeks")
@@ -376,11 +401,18 @@ def notes(data):
     These cannot always be cleared (blocked pages, no evidence yet), so they are not warnings.
     """
     out = []
-    eligible = _eligible(_ranked(data))
+    ranked = _ranked(data)
+    eligible = _eligible(ranked)
     if len(eligible) < 2:
         out.append("Fewer than 2 channels allow promotion, so there is nothing to validate in weeks 1-2")
     elif sum(1 for _, c in eligible if c["scores"]["speed"] > SLOW_SPEED) < 2:
         out.append("Fewer than 2 promotable channels can show a signal within weeks (speed > 2)")
+    roles = _roles(ranked)
+    for _, channel in ranked:
+        fit = channel["scores"]["icp_fit"]
+        if roles.get(id(channel)) == "validate" and fit <= WEAK_FIT:
+            out.append(f'"{channel["name"]}" has a weeks 1-2 slot but icp_fit is {fit}: '
+                       "check that its audience is your primary ICP")
     if data["research_mode"] == "live":  # offline, every rule is unknown by definition
         for channel in data.get("channels", []):
             if channel.get("promotion_allowed") == "unknown":
@@ -765,6 +797,9 @@ def main(argv=None):
     parser.add_argument('--strict', action='store_true', help='Treat warnings as errors')
     parser.add_argument('--template', action='store_true', help='Print a findings JSON skeleton and exit')
     args = parser.parse_args(argv)
+    for stream in (sys.stdout, sys.stderr):  # reports contain "—", "⚠", "⏱"; legacy Windows consoles are not UTF-8
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8', errors='replace')
     if args.template:
         print(json.dumps(TEMPLATE, indent=2, ensure_ascii=False))
         return 0

@@ -21,7 +21,7 @@ One primary, up to two secondary: job to be done, trigger, alternatives, objecti
 | Claim | Status | Confidence | Source | Accessed |
 |---|---|---|---|---|
 
-Then: **Assumptions** (how you read the request) and **What was not checked** (blocked pages, no web).
+Hypothesis-only: leave the ledger empty and state "unverified". Then: **Assumptions** (how you read the request, and what the user told you) and **What was not checked** (blocked pages, skipped pages, no web).
 
 ## Against the plan
 Disconfirming evidence and open questions. **Kill criteria**.
@@ -36,7 +36,7 @@ Roles: Validate now (top two promotable channels with speed 3+), After checkpoin
 What is spent now, what is conditional on which result, what stays in reserve.
 
 ## 30-day sprint
-Four weeks. Each: objective, actions, signal, stop/go gate. Week 3 is the checkpoint.
+Four weeks. Each: objective, actions, signal, stop/go gate. Weeks 1-2 validate the top two channels; the checkpoint is the review at the end of week 2, and week 3 acts on it.
 
 ## Copy drafts
 Positioning, three hooks (pain, outcome, contrast), launch post, reply draft, outreach draft. Each is a draft the user approves.

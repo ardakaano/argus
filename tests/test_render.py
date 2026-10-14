@@ -214,8 +214,9 @@ class RenderTests(unittest.TestCase):
         result = module.render(self.data)
         lines = {line.split('|')[1].strip(): line for line in result.splitlines() if line.startswith('| ') and '/' not in line[:4]}
         self.assertIn('Participate only', lines['Subreddit that bans tool promotion'])
+        self.assertIn('Validate now', lines['Direct conversations with founders you know'])
         self.assertIn('Validate now', lines['Founder communities (participation-first)'])
-        self.assertIn('Validate now', lines['Launch directories'])
+        self.assertIn('After checkpoint', lines['Launch directories'])
         self.assertIn('Background (slow payoff)', lines['Content on collecting feedback'])
 
     def test_slow_channel_never_takes_a_validation_slot(self):
@@ -549,6 +550,17 @@ class CliTests(unittest.TestCase):
         code, out, _ = self.run_cli(self.example(), '--html')
         self.assertTrue(out.startswith('<!doctype html>'))
 
+    def test_streams_are_switched_to_utf8(self):
+        # Reports contain "—", "⚠" and "⏱"; a legacy Windows console would otherwise raise UnicodeEncodeError.
+        class Stream(io.StringIO):
+            def reconfigure(self, **kwargs):
+                self.kwargs = kwargs
+        out, err = Stream(), Stream()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            self.assertEqual(module.main(['--template']), 0)
+        self.assertEqual(out.kwargs['encoding'], 'utf-8')
+        self.assertEqual(err.kwargs['encoding'], 'utf-8')
+
     def test_input_required(self):
         code, _, _ = self.run_cli()
         self.assertEqual(code, 2)
@@ -583,6 +595,173 @@ class SkillMetadataTests(unittest.TestCase):
             if line.startswith('- `') and '`:' in line:
                 rel = line.split('`')[1]
                 self.assertTrue((SKILL / rel).exists(), rel)
+
+    def test_documented_description_length_is_current(self):
+        import re
+        front = (SKILL / 'SKILL.md').read_text(encoding='utf-8').split('---')[1]
+        line = next(l for l in front.splitlines() if l.startswith('description:'))
+        actual = len(line) - len('description: ')
+        for name in ('HOWTO.md', 'HOWTO.tr.md', 'argus/references/platforms.md'):
+            text = (ROOT / name).read_text(encoding='utf-8')
+            stated = re.findall(r"description(?: is about|'ı yaklaşık) (\d{3})\b", text)
+            self.assertTrue(stated, f'{name} should state the description length')
+            for number in stated:
+                self.assertLessEqual(abs(int(number) - actual), 10, f'{name}: says {number}, actual {actual}')
+
+    def test_body_stays_within_the_recommended_size(self):
+        # The Agent Skills spec recommends under 500 lines and about 5000 tokens for the body.
+        body = (SKILL / 'SKILL.md').read_text(encoding='utf-8').split('---', 2)[2]
+        self.assertLess(len(body.splitlines()), 500)
+        self.assertLess(len(body.split()), 3000)
+
+
+class TextFieldTests(unittest.TestCase):
+    """A list or object in a free-text field would print as a Python repr in the report."""
+
+    def setUp(self):
+        self.data = load('example-output.json')
+
+    def test_lists_and_objects_are_rejected_everywhere_a_string_is_expected(self):
+        places = {
+            'snapshot.problem': lambda d: d['snapshot'],
+            'icps[1].alternatives': lambda d: d['icps'][0],
+            'channels[1].rationale': lambda d: d['channels'][0],
+            'weeks[1].gate': lambda d: d['weeks'][0],
+            'copy.launch_post': lambda d: d['copy'],
+            'experiments[1].kpi': lambda d: d['experiments'][0],
+        }
+        for label, holder in places.items():
+            for bad in (['a', 'b'], {'k': 1}, 7):
+                data = copy.deepcopy(self.data)
+                holder(data)[label.split('.')[-1]] = bad
+                with self.subTest(label=label, bad=bad), self.assertRaises(ValueError) as ctx:
+                    module.validate(data)
+                self.assertIn(f'{label} must be a string', str(ctx.exception))
+
+    def test_null_means_absent(self):
+        self.data['weeks'][0]['signal'] = None
+        self.data['copy']['outreach_draft'] = None
+        module.validate(self.data)
+        out = module.render(self.data)
+        self.assertNotIn(': None', out)
+        self.assertNotIn('> None', out)
+
+    def test_every_text_field_in_the_template_and_examples_is_a_string(self):
+        for data in (load('example-output.json'), load('example-output.tr.json'), copy.deepcopy(module.TEMPLATE)):
+            module.validate(data)
+
+    def test_hypothesis_only_error_says_what_to_do(self):
+        self.data['evidence'] = [{'claim': 'x'}]
+        with self.assertRaises(ValueError) as ctx:
+            module.validate(self.data)
+        self.assertIn('assumptions', str(ctx.exception))
+
+
+class WeakFitNoteTests(unittest.TestCase):
+    def setUp(self):
+        self.data = load('example-output.json')
+
+    def test_shipped_examples_raise_no_notes(self):
+        for name in ('example-output.json', 'example-output.tr.json'):
+            self.assertEqual(module.notes(load(name)), [], name)
+
+    def test_weak_audience_in_a_validation_slot_is_a_note_not_a_warning(self):
+        channel = self.data['channels'][0]
+        channel['scores']['icp_fit'] = 2
+        notes = ' | '.join(module.notes(self.data))
+        self.assertIn(f'"{channel["name"]}"', notes)
+        self.assertIn('icp_fit is 2', notes)
+        self.assertNotIn('icp_fit', ' | '.join(module.lint(self.data)))
+
+    def test_weak_audience_outside_the_validation_slots_is_not_flagged(self):
+        for channel in self.data['channels']:
+            if channel['scores']['speed'] <= 2 or channel.get('promotion_allowed') is False:
+                channel['scores']['icp_fit'] = 1
+        self.assertEqual(module.notes(self.data), [])
+
+
+class EvalsTests(unittest.TestCase):
+    def setUp(self):
+        self.evals = json.loads((ROOT / 'evals/evals.json').read_text(encoding='utf-8'))['evals']
+
+    def test_every_scenario_is_complete_and_unique(self):
+        ids = [e['id'] for e in self.evals]
+        self.assertEqual(len(ids), len(set(ids)))
+        for e in self.evals:
+            self.assertTrue(e['prompt'].strip() and len(e['expectations']) >= 4, e['id'])
+
+    def test_readme_counts_the_scenarios(self):
+        words = {5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve'}
+        readme = (ROOT / 'evals/README.md').read_text(encoding='utf-8')
+        self.assertIn(f'holds {words[len(self.evals)]} scenarios', readme)
+
+
+class SiteJsonTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec_b = spec_from_file_location('build_site_json', ROOT / 'site/build_site_json.py')
+        cls.builder = module_from_spec(spec_b)
+        spec_b.loader.exec_module(cls.builder)
+        cls.full = json.loads((ROOT / 'site/argus.json').read_text(encoding='utf-8'))
+        cls.lite = json.loads((ROOT / 'site/argus.lite.json').read_text(encoding='utf-8'))
+
+    def test_committed_files_are_current(self):
+        data = self.builder.build()
+        self.assertEqual((ROOT / 'site/argus.json').read_text(encoding='utf-8'), self.builder.dump(data), 'Run `make site`')
+        self.assertEqual((ROOT / 'site/argus.lite.json').read_text(encoding='utf-8'), self.builder.dump(self.builder.lite(data)), 'Run `make site`')
+
+    def test_version_matches_the_skill(self):
+        text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
+        self.assertIn(f'version: "{self.full["version"]}"', text)
+        released = [c['version'] for c in self.full['changelog'] if c['version'] != 'Unreleased']
+        self.assertEqual(released[0], self.full['version'])
+
+    def test_file_hashes_and_coverage(self):
+        import hashlib
+        on_disk = {p.relative_to(SKILL).as_posix() for p in SKILL.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+        listed = {f['path'].removeprefix('argus/') for f in self.full['files']}
+        self.assertEqual(on_disk, listed)
+        for f in self.full['files']:
+            self.assertEqual(hashlib.sha256(f['content'].encode('utf-8')).hexdigest(), f['sha256'], f['path'])
+            self.assertEqual(len(f['content'].encode('utf-8')), f['bytes'])
+
+    def test_every_text_is_bilingual(self):
+        problems = []
+
+        def walk(node, path=''):
+            if isinstance(node, dict):
+                if set(node) == {'en', 'tr'}:
+                    problems.extend(f'{path}.{k}' for k in ('en', 'tr') if not str(node[k]).strip())
+                else:
+                    for key, value in node.items():
+                        if key not in ('files', 'system_prompt', 'changelog'):
+                            walk(value, f'{path}/{key}')
+            elif isinstance(node, list):
+                for i, value in enumerate(node):
+                    walk(value, f'{path}[{i}]')
+        walk(self.full)
+        self.assertEqual(problems, [])
+
+    def test_platforms_match_the_howto(self):
+        howto = (ROOT / 'HOWTO.md').read_text(encoding='utf-8')
+        for platform in self.full['platforms']:
+            self.assertIn(platform['vendor_docs'], howto, platform['id'])
+            self.assertTrue(platform['install']['steps'] and platform['first_prompt']['en'].strip())
+
+    def test_nothing_private_leaks(self):
+        raw = (ROOT / 'site/argus.json').read_text(encoding='utf-8')
+        for needle in ('/Users/', 'ardakaanozcan', 'api_key', 'sk-'):
+            self.assertNotIn(needle, raw)
+
+    def test_lite_is_small_and_has_no_contents(self):
+        self.assertTrue(all('content' not in f for f in self.lite['files']))
+        self.assertNotIn('text', self.lite['system_prompt'])
+        self.assertLess((ROOT / 'site/argus.lite.json').stat().st_size, 60 * 1024)
+        self.assertEqual([f['path'] for f in self.lite['files']], [f['path'] for f in self.full['files']])
+
+    def test_system_prompt_carries_the_research_gate(self):
+        self.assertIn('Never research unless the user gave you a URL', self.full['system_prompt']['text'])
+        self.assertNotIn('name: argus', self.full['system_prompt']['text'][:200], 'frontmatter must be stripped')
 
 
 if __name__ == '__main__':

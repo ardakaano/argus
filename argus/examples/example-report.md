@@ -59,10 +59,11 @@ Hypothesis-only demo: validate whether solo SaaS founders want a lightweight in-
 ## Channel ranking
 | Channel | Score /100 | Role | Rationale | Effort | Rule / caveat |
 |---|---:|---|---|---|---|
+| Direct conversations with founders you know | 90 (5·3·5·5·5·4·5) | Validate now (weeks 1–2) | Fastest signal and the cheapest proof of the pain; it does not scale. | Low: five calls in week 1 | One-to-one only, no bulk messages; say who you are and make saying no easy |
 | Subreddit that bans tool promotion | 79 (5·4·3·4·5·3·1) | Participate only, no promotion | Great place to learn what people complain about. | Low | Hypothetical: rules prohibit self-promotion, so listen and help only |
 | Founder communities (participation-first) | 75 (4·3·4·4·5·3·3) | Validate now (weeks 1–2) | Fast qualitative feedback from the exact ICP, if the founder has standing. | Medium: daily presence for two weeks | Check each community's current promotion rules |
 | Content on collecting feedback | 66 (4·3·3·2·5·2·5) | Background (slow payoff) | Compounding search reach, but slow validation. | High: one useful post per week | None beyond honest disclosure |
-| Launch directories | 57 (2·2·3·4·4·3·4) | Validate now (weeks 1–2) | A spike of visits, mostly other makers, not buyers. | Low | Read each directory's guidelines |
+| Launch directories | 57 (2·2·3·4·4·3·4) | After checkpoint | A spike of visits, mostly other makers, not buyers. | Low | Read each directory's guidelines |
 
 *Score /100 is a weighted sum. In brackets, the seven 1–5 inputs in this order: ICP fit·Intent·Reach·Speed·Cost·Ease·Safety. A comparison aid, not a forecast.*
 

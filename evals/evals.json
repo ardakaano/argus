@@ -69,6 +69,46 @@
         "Evidence ledger is empty; no invented sources, prices or competitor numbers",
         "Still gives a useful hypothesis-only plan (channels, kill criteria, a 48-hour experiment)"
       ]
+    },
+    {
+      "id": "quick-url-limited-research",
+      "needs_web": true,
+      "prompt": "Where should I launch https://usesled.com? Short answer please. Budget: $300.",
+      "expectations": [
+        "Quick shape: about 400-600 words excluding drafts, in the chat reply; does not run the renderer",
+        "Opens the given URL and reads no more than about eight pages in total",
+        "Every factual market claim carries its source URL and access date inline",
+        "Mode line says live research with the URL and access date",
+        "Top 3 channels, one disconfirming point with kill criteria, one 48-hour experiment, one draft post marked as not sent",
+        "No invented prices, numbers or community rules; ends by offering the Full plan"
+      ]
+    },
+    {
+      "id": "pasted-page-no-ledger",
+      "needs_web": false,
+      "web_tools_available": true,
+      "prompt": "Make me a full 30-day launch plan. I can't share the link yet, so here is the landing page text: 'Pingdesk: shared inbox for small repair shops. Customers text one number, your whole team replies from one screen. $19 per shop per month. Unlike WhatsApp Business, no personal phones involved.' Web tools are available in this session.",
+      "expectations": [
+        "Makes no web search, fetch or browse call of any kind",
+        "Says at the top that no URL was given, so nothing was researched and the plan is hypothesis-only",
+        "Treats the pasted text as the maker's own claim: the $19 price and the WhatsApp comparison are marked as reported by the user, not verified",
+        "Evidence ledger is empty; the pasted claims sit under assumptions, not in the ledger as verified",
+        "If a shell exists, the findings JSON has research_mode hypothesis-only and passes --check --strict",
+        "Ends by inviting the user to send the product URL"
+      ]
+    },
+    {
+      "id": "language-without-renderer-support",
+      "needs_web": false,
+      "prompt": "Ich habe eine kleine App, die Handwerkern hilft, Angebote schneller zu schreiben. Kein Budget, keine Reichweite. Wo finde ich meine ersten 20 Nutzer? Kein Webzugriff in dieser Sitzung.",
+      "expectations": [
+        "Replies in German, headings included",
+        "Labels the answer as hypothesis-only because there was no URL and no web access",
+        "Quick shape: top 3 channels, one disconfirming point with kill criteria, a 48-hour experiment, a draft post marked as not sent",
+        "No internal terms such as 'doubt eye'; an unexplained 'ICP' is avoided",
+        "Does not set language to a value the renderer rejects; if a shell exists it does not render a German report with the script",
+        "Offers the Full plan at the end"
+      ]
     }
   ]
 }
