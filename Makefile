@@ -1,10 +1,19 @@
 SKILL := argus
 RENDER := python3 $(SKILL)/scripts/render_report.py
 
-.PHONY: test examples logo site zip clean
+.PHONY: test check fuzz examples logo site zip clean
 
 test:
 	python3 -m unittest discover -s tests -v
+
+# Randomised robustness run for the renderer: mutated findings JSON must fail cleanly,
+# never with a Python traceback.
+fuzz:
+	python3 tests/fuzz_render.py 120
+
+# Full gate: unit tests (they also assert that site/ and the example reports match
+# their sources, so this works the same on a dirty working tree and in CI).
+check: test
 
 # Regenerate the shipped example reports from their JSON.
 examples:

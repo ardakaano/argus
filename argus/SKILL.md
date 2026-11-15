@@ -5,7 +5,7 @@ license: MIT
 compatibility: Live research happens only when the user supplies a product URL and web tools exist. Optional Python 3.10+ script uses only the standard library. Works in read-only conversational mode without shell access.
 metadata:
   author: Arda Kaan Özcan
-  version: "0.4.1"
+  version: "0.4.2"
 ---
 
 # Argus
@@ -55,6 +55,7 @@ This applies when no URL was given, the URL did not open, web tools are missing,
 
 - Say so at the top and do not pretend you audited anything. Leave the evidence ledger empty. What the user told you goes under assumptions or the snapshot, marked "reported by the user, not verified"; competitors or figures named only on a pasted page are self-reported too.
 - Known competitors may be named from memory, labelled as hypotheses, never with prices, rankings or numbers.
+- When the page or text you were given names competitors or figures, name them in the plan and mark them reported (for example "Geekbot and Standuply, named on the page, pricing unverified"). Do not flatten them into "rivals exist": the user came for the specifics and can check a named claim.
 - Name venue *categories* ("Slack or Discord groups for freelancers"), not specific communities you have not seen, and set them to `"unknown"`. A venue the user named is fine, with its rules marked "reported by the user". Your own accounts, your own site and one-to-one outreach are not venues with rules (`promotion_allowed: true`).
 - Expect only own-network channels to qualify for weeks 1-2: two are enough. A venue category may appear as an optional third row marked "read the rules first"; it takes no sprint slot until the rules are read. Do not pad.
 - Every score is an assumption: say the scores are a rough ordering of hypotheses.

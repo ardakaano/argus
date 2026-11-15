@@ -764,5 +764,78 @@ class SiteJsonTests(unittest.TestCase):
         self.assertNotIn('name: argus', self.full['system_prompt']['text'][:200], 'frontmatter must be stripped')
 
 
+class ExampleFreshnessTests(unittest.TestCase):
+    """`make examples` output is committed; it must match what the renderer produces now."""
+
+    def test_committed_reports_are_current(self):
+        pairs = [
+            ('example-output.json', 'example-report.md', module.render),
+            ('example-output.json', 'example-report.html', module.render_html),
+            ('example-output.tr.json', 'example-report.tr.md', module.render),
+            ('example-output.tr.json', 'example-report.tr.html', module.render_html),
+        ]
+        for source, target, renderer in pairs:
+            data = load(source)
+            expected = (SKILL / 'examples' / target).read_text(encoding='utf-8')
+            self.assertEqual(expected, renderer(data).rstrip() + '\n' if target.endswith('.md')
+                             else renderer(data), f'{target} is stale: run `make examples`')
+
+
+class HostileInputTests(unittest.TestCase):
+    """Content that arrives from a web page or a pasted block can be hostile or weird.
+
+    None of these should crash the renderer, break the markdown tables, allow the input to
+    escape its own context, or print invisible control characters.
+    """
+
+    def test_html_report_escapes_pasted_markup(self):
+        data = live_report()
+        data['product_name'] = '<script>alert(1)</script>'
+        data['channels'][0]['name'] = '"><img src=x onerror=alert(1)>'
+        html = module.render_html(data)
+        for needle in ('<script>alert(1)</script>', '<img src=x', '"><img'):
+            self.assertNotIn(needle, html)
+        self.assertIn('&lt;script&gt;', html)
+
+    def test_markdown_table_cells_survive_pipes_and_newlines(self):
+        data = live_report()
+        data['channels'][0]['name'] = 'Forum | with pipe'
+        data['channels'][0]['rationale'] = 'first line\nsecond line'
+        md = module.render(data)
+        lines = md.splitlines()
+        row_index = next(i for i, line in enumerate(lines) if 'with pipe' in line)
+        header = next(line for line in reversed(lines[:row_index]) if line.startswith('|'))
+        expected = header.count('|')
+        row = lines[row_index]
+        self.assertEqual(row.replace('\\|', '').count('|'), expected,
+                         'an escaped pipe must not open a new column: ' + row)
+        self.assertIn('first line second line', row, 'a newline inside a cell becomes a space')
+
+    def test_control_characters_are_dropped_and_unicode_survives(self):
+        data = live_report()
+        data['product_name'] = 'Form\x00Nest\x07 🚀 مرحبا'
+        md = module.render(data)
+        self.assertNotIn('\x00', md, 'NUL must be dropped, not printed')
+        self.assertNotIn('\x07', md, 'BEL must be dropped, not printed')
+        self.assertIn('🚀', md)
+        self.assertIn('مرحبا', md)
+
+    def test_absurd_numbers_render_without_scientific_notation(self):
+        data = live_report()
+        data['experiments'][0]['budget_usd'] = 10 ** 15
+        data['experiments'][1]['budget_usd'] = 19.5
+        md = module.render(data)
+        self.assertIn('$1,000,000,000,000,000', md)
+        self.assertNotIn('e+15', md)
+        self.assertIn('$19.5', md)
+
+    def test_very_long_text_renders_in_full(self):
+        data = live_report()
+        data['channels'][0]['rationale'] = 'uzun ' * 600
+        md = module.render(data)
+        self.assertIn('uzun uzun', md)
+        self.assertGreater(len(md), 4000)
+
+
 if __name__ == '__main__':
     unittest.main()

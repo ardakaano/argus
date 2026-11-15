@@ -308,9 +308,20 @@ def validate(data):
         raise ValueError("Invalid findings:\n" + "\n".join("- " + p for p in problems))
 
 
+def _money(value):
+    """Dollar amount with thousands separators and no exponent notation.
+
+    `:g` used to turn 10**15 into `1e+15`, which reads like a unit suffix rather than money.
+    """
+    if isinstance(value, int):
+        return f"${value:,}"
+    text = f"{value:,.2f}".rstrip("0").rstrip(".")
+    return f"${text}"
+
+
 def _budget(exp):
     """Free-text `budget` (any currency) wins over `budget_usd`."""
-    return exp["budget"].strip() if "budget" in exp else f'${exp["budget_usd"]:g}'
+    return exp["budget"].strip() if "budget" in exp else _money(exp["budget_usd"])
 
 
 def _ranked(data):
@@ -422,9 +433,13 @@ def notes(data):
     return out
 
 
+CONTROL_CHARS = dict.fromkeys(range(32), None) | dict.fromkeys(range(127, 160), None)
+
+
 def _esc(value):
-    """Neutralize raw HTML that could ride in on untrusted research text."""
-    return str(value).replace("<", "&lt;").replace(">", "&gt;")
+    """Neutralize raw HTML and invisible control characters from untrusted research text."""
+    text = str(value).translate(CONTROL_CHARS)
+    return text.replace("<", "&lt;").replace(">", "&gt;")
 
 
 def inline(value):

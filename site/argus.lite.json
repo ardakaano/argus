@@ -6,7 +6,7 @@
   },
   "id": "argus",
   "name": "Argus",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "MIT",
   "author": {
     "name": "Arda Kaan Özcan",
@@ -790,6 +790,9 @@
   ],
   "changelog": [
     {
+      "version": "0.4.2"
+    },
+    {
       "version": "0.4.1"
     },
     {
@@ -812,8 +815,8 @@
     {
       "path": "argus/SKILL.md",
       "role": "instructions",
-      "bytes": 16152,
-      "sha256": "a802455df3fcb7f9d5660257c2fe12009730f6416419a2ab73bb63c84e1e2f1d",
+      "bytes": 16446,
+      "sha256": "72dd9a3a9c00b3c566dcc94397bb47648bd25d3094dfaca881bccaa7553ef802",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/SKILL.md"
     },
     {
@@ -924,8 +927,8 @@
     {
       "path": "argus/scripts/render_report.py",
       "role": "script",
-      "bytes": 47442,
-      "sha256": "acd1a197f5dd3c6d05fa45b2071f7ce02a465f939b6d6f42a1556a4cd165448b",
+      "bytes": 47916,
+      "sha256": "5a0d79f935d69b10a9091b8fcca57c774953da50152a34e0a42727ffe8f62f37",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/scripts/render_report.py"
     }
   ],
@@ -934,6 +937,6 @@
       "en": "SKILL.md body plus references and templates, for a chat widget backed by a model you provide. Not needed for platforms that load the skill natively.",
       "tr": "SKILL.md gövdesi, referanslar ve şablonlar; sağladığın bir modelle çalışan sohbet bileşeni için. Skill'i yerel yükleyen platformlarda gerekmez."
     },
-    "approx_tokens": 10366
+    "approx_tokens": 10440
   }
 }

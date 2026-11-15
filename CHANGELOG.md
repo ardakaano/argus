@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2
+
+Hardening found by fuzzing the renderer, running five fresh-agent eval scenarios against the skill, and closing two gaps in how the repo guards its own generated files.
+
+- **Renderer, money.** `budget_usd` was printed with `:g`, so a large ceiling became `$1e+15`, which reads like a unit suffix. Amounts are now formatted with thousands separators and never in exponent notation (`$1,000,000,000,000,000`, `$19.5`).
+- **Renderer, untrusted text.** Invisible control characters (C0 and C1) from a page or a pasted block are dropped before rendering; before, a NUL or BEL travelled straight into the report. Emoji and non-Latin scripts are untouched.
+- **Skill text.** When the page or text the user supplied names competitors, the plan names them and marks them reported instead of writing "rivals exist", which loses the one specific the user can check (found in the prompt-injection eval).
+- **Tests.** New `HostileInputTests` class: pasted markup cannot escape its context in the HTML report, a pipe or a newline cannot break a markdown table, control characters are dropped, absurd numbers stay readable, long text renders in full. Plus `tests/fuzz_render.py`, which mutates the example findings on random field paths and fails if the renderer ever prints a traceback instead of a clean error (`make fuzz`).
+- **Build gate.** `make check` runs the unit tests, which now also assert that `site/argus*.json` and the four committed example reports match what the current code produces (in-memory comparison, so it works on a dirty tree as well as in CI). CI gained a `generated` job that runs `make check`, builds the Claude.ai ZIP with `make zip` and uploads it as an artifact.
+
 ## 0.4.1
 
 Skill review: fixes and gaps found by reading every file, fuzzing the renderer, and running the skill through six fresh-agent scenarios (`evals/RESULTS.md`, round 4).
