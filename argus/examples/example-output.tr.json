@@ -87,7 +87,7 @@
         "Beş danışmanla 15 dakikalık görüşme yap"
       ],
       "signal": "Beşten üçü sorun sormadan çift rezervasyondan bahsediyor",
-      "gate": "İkiden azı doğrularsa ICP'yi değiştir"
+      "gate": "İkiden azı doğrularsa birincil müşteriyi değiştir"
     },
     {
       "week": 2,
@@ -116,7 +116,7 @@
         "Zayıf deneyleri durdur"
       ],
       "signal": "Bir kanal belirgin önde",
-      "gate": "Sinyal yoksa durup ICP'yi yeniden düşün"
+      "gate": "Sinyal yoksa durup birincil müşteriyi yeniden düşün"
     }
   ],
   "copy": {
@@ -135,7 +135,7 @@
       "channel": "Doğrudan görüşme",
       "test": "Beş kısa görüşme",
       "kpi": "Sorunu kendiliğinden anlatanlar",
-      "decision_gate": "Önerilen: 5'te 3 devam, 2'den azı ICP değişimi",
+      "decision_gate": "Önerilen: 5'te 3 devam, 2'den azı birincil müşteri değişimi",
       "within_48h": true
     },
     {

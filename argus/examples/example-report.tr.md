@@ -43,7 +43,7 @@ Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların
 | Meslek toplulukları (katılım odaklı) | 72 (4·3·3·4·5·3·3) | Şimdi doğrula (hafta 1–2) | Hedef kitleyle hızlı niteliksel geri bildirim. | Orta | Her topluluğun güncel tanıtım kuralını kontrol et |
 | Arama odaklı içerik | 65 (3·4·3·2·5·2·5) | Arka planda (yavaş dönüş) | Zamanla birikir ama doğrulaması yavaş. | Yüksek | Yok |
 
-*Skor /100 ağırlıklı toplamdır. Parantez içinde yedi girdi (her biri 1–5) şu sırayla: ICP uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik. Karşılaştırma aracıdır, tahmin değildir.*
+*Skor /100 ağırlıklı toplamdır. Parantez içinde yedi girdi (her biri 1–5) şu sırayla: Müşteri uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik. Karşılaştırma aracıdır, tahmin değildir.*
 
 *Buradaki her skor varsayıma dayanır. Ölçülmüş uyum değil, hipotezlerin kaba bir sıralaması olarak oku.*
 
@@ -52,7 +52,7 @@ Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların
 ### Hafta 1 — Acıyı doğrula
 - Beş danışmanla 15 dakikalık görüşme yap
 - **Sinyal:** Beşten üçü sorun sormadan çift rezervasyondan bahsediyor
-- **Dur/devam kapısı:** İkiden azı doğrularsa ICP'yi değiştir
+- **Dur/devam kapısı:** İkiden azı doğrularsa birincil müşteriyi değiştir
 
 ### Hafta 2 — İlk iki kanalı dene
 - Bir toplulukta faydalı bir yazı paylaş
@@ -69,7 +69,7 @@ Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların
 - Kanalları karşılaştır
 - Zayıf deneyleri durdur
 - **Sinyal:** Bir kanal belirgin önde
-- **Dur/devam kapısı:** Sinyal yoksa durup ICP'yi yeniden düşün
+- **Dur/devam kapısı:** Sinyal yoksa durup birincil müşteriyi yeniden düşün
 
 ## Metin taslakları
 **Konumlandırma:** Birden fazla takvimi olan serbest danışmanlar için Zeytin Takvim, çift rezervasyonu bitiren hafif bir takvim birleştiricidir.
@@ -93,7 +93,7 @@ Kurgusal örnek. Randevu çakışmasıyla uğraşan bağımsız danışmanların
    - Kanal: Doğrudan görüşme
    - Test: Beş kısa görüşme
    - KPI: Sorunu kendiliğinden anlatanlar
-   - Kapı: Önerilen: 5'te 3 devam, 2'den azı ICP değişimi
+   - Kapı: Önerilen: 5'te 3 devam, 2'den azı birincil müşteri değişimi
    - ⏱ 48 saat içinde başlayabilir
 2. **'Çift rezervasyonu bitir' vaadi 'tek bağlantı' vaadinden daha çok tıklanır**
    - Kanal: Bekleme listesi sayfası

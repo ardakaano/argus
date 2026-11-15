@@ -76,7 +76,7 @@
         "effort": 3,
         "risk": 3
       },
-      "rationale": "Fast qualitative feedback from the exact ICP, if the founder has standing.",
+      "rationale": "Fast qualitative feedback from the exact primary customer, if the founder has standing.",
       "effort": "Medium: daily presence for two weeks",
       "rule": "Check each community's current promotion rules",
       "promotion_allowed": true,
@@ -148,7 +148,7 @@
         "Draft two landing-page promises"
       ],
       "signal": "At least 3 of 5 describe the pain without being prompted",
-      "gate": "Fewer than 2 confirm: change the ICP before building more"
+      "gate": "Fewer than 2 confirm: change the primary customer before building more"
     },
     {
       "week": 2,
@@ -178,7 +178,7 @@
         "Stop weak experiments"
       ],
       "signal": "One channel clearly outperforms",
-      "gate": "No channel has signal: pause and revisit the ICP"
+      "gate": "No channel has signal: pause and revisit the primary customer"
     }
   ],
   "copy": {
@@ -198,7 +198,7 @@
       "channel": "Direct conversations",
       "test": "Five 15-minute calls with founders found in communities where they already talk about the topic",
       "kpi": "Calls where the pain is raised unprompted",
-      "decision_gate": "Proposed: 3 of 5 continue, fewer than 2 means change the ICP",
+      "decision_gate": "Proposed: 3 of 5 continue, fewer than 2 means change the primary customer",
       "within_48h": true
     },
     {

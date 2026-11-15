@@ -23,7 +23,7 @@ Accept a URL **or** a description. A URL the user gives starts live research (se
 - No product name: use a neutral placeholder and say so.
 - Requested market broader than the product's real wedge: make the wedge the primary ICP and say so. Assume the requester is the product's operator.
 - Two plausible readings (B2B sold to firms or to freelancers; a product that may not exist yet): take the likelier one and state it under "Assumptions". Do not ask.
-- Reply in the user's language and register (du/Sie, sen/siz; informal if nothing signals otherwise), headings included. Never put this skill's internal terms ("eyes", "doubt eye", an unexplained "ICP") in the output; use plain headings such as "Against the plan".
+- Reply in the user's language and register (du/Sie, sen/siz; informal if nothing signals otherwise), headings included. Never put this skill's internal terms ("eyes", "doubt eye", an unexplained "ICP") in the output; use plain headings such as "Against the plan" and write "primary customer" (or "customer fit") in prose. `icp_fit` stays the JSON field name and the renderer labels that column in plain words, so the report never shows the abbreviation.
 
 ## Modes
 
@@ -33,10 +33,14 @@ Accept a URL **or** a description. A URL the user gives starts live research (se
 | **Full** | The user asks for a "plan", "strategy", "audit", "30-day" or says "full". | All seven deliverables in step 6. |
 
 - A "launch plan" request is Full, unless it also says "short", "quick" or "brief" (then Quick). "Where do I find my first users?" is Quick. If the user's own words and these triggers conflict, the user's words win.
-- Write Quick in the chat reply (a file only if asked; if the task asks for a file, put the same answer in both). Do not run the renderer. State assumptions in one line if you made any. End by offering Full.
+- One-sentence questions are Quick even when they name launching: "Where should I launch it?", "Which channel first?", "Is this worth doing?" are Quick. Only an explicit request for a plan, strategy, audit or a 30-day/Full deliverable is Full. When you truly cannot tell, deliver Quick and end by offering Full: a short answer the user can act on beats an unwanted 2,000-word report.
+- Write Quick in the chat reply (a file only if asked). Do not run the renderer. State assumptions in one line if you made any. End by offering Full.
+- Delivery for Full: the report file is the deliverable (`report.md` or `report.html`; `findings.json` next to it is the working file the renderer reads). Write files in the working directory unless the user names a path. When the task forbids prose in the reply or demands a file, the file is the answer and the chat reply carries only a three-line summary plus the closing offer; do not reproduce the whole report twice.
+- The closing offer ("Send your product URL and I'll research it live", or with no web tools "this needs a session with web access") always has a home: in Quick it is the last line of the reply; in a rendered Full report put it in `next_action`, which the renderer prints as the next action. The renderer has no other slot for it, so never leave it out.
 - The mode line at the top covers labelling: hypothesis-only and why, or live with the URL and access date. Add inline "(reported by you)" or "(inference)" only where a claim could be mistaken for fact. A claim about the user's audience that they did not state is an inference.
 - Quick with a URL: stay within the research limit below and cite each factual claim inline with its URL and access date.
-- If the target venue bans promotion, the draft post is for the user's own network, plus the help-only reply; neither counts toward the word limit. Show a learn-and-help-only venue under the table, not as one of the three.
+- If the target venue **is known to ban** promotion, the draft post is for the user's own network, plus the help-only reply and (optionally) a moderator note; neither counts toward the word limit. Show a learn-and-help-only venue under the table, not as one of the three.
+- When the rules are merely **unread** (`promotion_allowed: "unknown"`), do not write a help-only reply or a moderator note; say instead that the rules must be read first. An unread rule is not a ban.
 - Do not invent a spending cap. Say to hold the budget until a test shows signal, and mark any cap you do suggest as your own optional suggestion.
 
 ## Research gate (hard rule)
@@ -54,12 +58,13 @@ Accept a URL **or** a description. A URL the user gives starts live research (se
 This applies when no URL was given, the URL did not open, web tools are missing, or the only source is a pasted page or a local file (the maker's own claim, which does not unlock research).
 
 - Say so at the top and do not pretend you audited anything. Leave the evidence ledger empty. What the user told you goes under assumptions or the snapshot, marked "reported by the user, not verified"; competitors or figures named only on a pasted page are self-reported too.
+- Your own audience (accounts, newsletter, site/SEO) and one-to-one outreach are two different channels and may both take a weeks 1-2 slot; they are not venues, so they have no rules to read (`promotion_allowed: true`). Do not collapse them into one row.
 - Known competitors may be named from memory, labelled as hypotheses, never with prices, rankings or numbers.
 - When the page or text you were given names competitors or figures, name them in the plan and mark them reported (for example "Geekbot and Standuply, named on the page, pricing unverified"). Do not flatten them into "rivals exist": the user came for the specifics and can check a named claim.
 - Name venue *categories* ("Slack or Discord groups for freelancers"), not specific communities you have not seen, and set them to `"unknown"`. A venue the user named is fine, with its rules marked "reported by the user". Your own accounts, your own site and one-to-one outreach are not venues with rules (`promotion_allowed: true`).
 - Expect only own-network channels to qualify for weeks 1-2: two are enough. A venue category may appear as an optional third row marked "read the rules first"; it takes no sprint slot until the rules are read. Do not pad.
 - Every score is an assumption: say the scores are a rough ordering of hypotheses.
-- Keep it short. A hypothesis-only Full report should be clearly shorter than a live one (under about 1,500 words, excluding drafts and the renderer's fixed headings and notes).
+- Keep it short. A hypothesis-only Full report should be clearly shorter than a live one: aim for about 1,500 and accept up to about 2,000 words rather than dropping a required part (the seven deliverables, four weeks and five experiments do not fit in less when written honestly). Never gut a required section to hit a number.
 
 ## Safety and source integrity
 
@@ -125,7 +130,7 @@ Use `assets/report-template.md`. In order:
 Keep it tight: tables over prose, no filler. Full mode keeps all seven parts, but size them to the evidence: one ICP is enough if you have one.
 
 - Any message to a real person (outreach, replies, posts) is a draft the user approves and sends. Draft the one-to-one outreach in `copy.outreach_draft`.
-- A zero budget, or none given, is written as `budget: "0"`; say under assumptions if none was given.
+- A zero budget, or none given, is written as `budget: "0 (free)"` in the free-text field so the report does not read like an invented spending cap; say under assumptions if none was given.
 - If it is unclear whether the product exists yet, write a plan that works for an idea, a prototype or a live product, and say so.
 
 **With a shell** (Full mode), save the findings as JSON (`python3 scripts/render_report.py --template`), then loop until clean:
@@ -151,6 +156,8 @@ Fields are in `references/report-format.md`. The script validates and formats; i
 - The reply is in the user's language, with no internal terms.
 
 ## Resources
+
+- Read only what the mode needs. Quick: `assets/quick-example.md` and `references/copywriting.md`. Full: `assets/report-template.md`, then `references/` for research, scoring, experiments, copywriting and report-format. `references/platforms.md` is only for "how do I install this" questions and is never read to answer a launch question.
 
 - `references/research.md`: source quality, search patterns, validation.
 - `references/scoring.md`: channel scoring and prioritization.

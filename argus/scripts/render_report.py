@@ -73,7 +73,7 @@ STRINGS = {
         "role_verify": "Read the rules first",
         "audit": "Fixes on your own pages", "assumptions": "Assumptions", "limits": "What was not checked", "budget": "Budget plan",
         "assumption": "assumption",
-        "legend": "Score /100 is a weighted sum. In brackets, the seven 1–5 inputs in this order: ICP fit·Intent·Reach·Speed·Cost·Ease·Safety. A comparison aid, not a forecast.",
+        "legend": "Score /100 is a weighted sum. In brackets, the seven 1–5 inputs in this order: Customer fit·Intent·Reach·Speed·Cost·Ease·Safety. A comparison aid, not a forecast.",
         "hyp_scores": "Every score here rests on assumptions. Read them as a rough ordering of hypotheses, not as measured fit.",
         "sprint": "30-day sprint", "week": "Week", "signal": "Signal", "gate": "Stop/go gate",
         "copy": "Copy drafts", "positioning": "Positioning", "hooks": "Hooks",
@@ -101,7 +101,7 @@ STRINGS = {
         "role_verify": "Önce kuralları oku",
         "audit": "Kendi sayfalarında düzeltilecekler", "assumptions": "Varsayımlar", "limits": "Kontrol edilemeyenler", "budget": "Bütçe planı",
         "assumption": "varsayım",
-        "legend": "Skor /100 ağırlıklı toplamdır. Parantez içinde yedi girdi (her biri 1–5) şu sırayla: ICP uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik. Karşılaştırma aracıdır, tahmin değildir.",
+        "legend": "Skor /100 ağırlıklı toplamdır. Parantez içinde yedi girdi (her biri 1–5) şu sırayla: Müşteri uyumu·Niyet·Erişim·Hız·Maliyet·Kolaylık·Güvenlik. Karşılaştırma aracıdır, tahmin değildir.",
         "hyp_scores": "Buradaki her skor varsayıma dayanır. Ölçülmüş uyum değil, hipotezlerin kaba bir sıralaması olarak oku.",
         "sprint": "30 günlük sprint", "week": "Hafta", "signal": "Sinyal", "gate": "Dur/devam kapısı",
         "copy": "Metin taslakları", "positioning": "Konumlandırma", "hooks": "Kancalar",
@@ -422,8 +422,8 @@ def notes(data):
     for _, channel in ranked:
         fit = channel["scores"]["icp_fit"]
         if roles.get(id(channel)) == "validate" and fit <= WEAK_FIT:
-            out.append(f'"{channel["name"]}" has a weeks 1-2 slot but icp_fit is {fit}: '
-                       "check that its audience is your primary ICP")
+            out.append(f'"{channel["name"]}" has a weeks 1-2 slot but customer fit is {fit}: '
+                       "check that its audience matches your primary customer")
     if data["research_mode"] == "live":  # offline, every rule is unknown by definition
         for channel in data.get("channels", []):
             if channel.get("promotion_allowed") == "unknown":

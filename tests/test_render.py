@@ -670,7 +670,8 @@ class WeakFitNoteTests(unittest.TestCase):
         channel['scores']['icp_fit'] = 2
         notes = ' | '.join(module.notes(self.data))
         self.assertIn(f'"{channel["name"]}"', notes)
-        self.assertIn('icp_fit is 2', notes)
+        self.assertIn('customer fit is 2', notes)
+        self.assertNotIn('ICP', notes, 'prose must not use the abbreviation')
         self.assertNotIn('icp_fit', ' | '.join(module.lint(self.data)))
 
     def test_weak_audience_outside_the_validation_slots_is_not_flagged(self):
@@ -779,6 +780,23 @@ class ExampleFreshnessTests(unittest.TestCase):
             expected = (SKILL / 'examples' / target).read_text(encoding='utf-8')
             self.assertEqual(expected, renderer(data).rstrip() + '\n' if target.endswith('.md')
                              else renderer(data), f'{target} is stale: run `make examples`')
+
+
+class PlainLanguageTests(unittest.TestCase):
+    """The skill forbids internal jargon in output; the renderer must not smuggle it back in."""
+
+    def test_reports_never_print_the_abbreviation(self):
+        for source in ('example-output.json', 'example-output.tr.json'):
+            data = load(source)
+            for renderer in (module.render, module.render_html):
+                text = renderer(data)
+                self.assertNotIn('ICP', text, f'{source} smuggles the abbreviation back in')
+                self.assertNotIn('doubt eye', text.lower())
+
+    def test_legend_speaks_about_customers(self):
+        data = load('example-output.json')
+        self.assertIn('Customer fit', module.render(data))
+        self.assertIn('Müşteri uyumu', module.render(load('example-output.tr.json')))
 
 
 class HostileInputTests(unittest.TestCase):

@@ -1,6 +1,6 @@
 # Quick answer: shape and length
 
-A fictional example of a Quick-mode reply (about 400 words). Match the **shape**, in the user's language, and never copy the content: the product, channels and numbers here are made up.
+A fictional example of a Quick-mode reply (400-600 words, drafts excluded). Match the **shape**, in the user's language, and never copy the content: the product, channels and numbers here are made up.
 
 ---
 
@@ -21,7 +21,7 @@ Freelance designers who send 5+ invoices a month. Trigger: a client pays late an
 
 ## Against the plan
 - A spreadsheet may be good enough, so the pain could be real but unpaid.
-- **Kill criteria (first 2 weeks):** fewer than 3 of 10 chats raise late payments unprompted, or nobody sends a real invoice through it after two onboarding fixes: change the ICP or stop.
+- **Kill criteria (first 2 weeks):** fewer than 3 of 10 chats raise late payments unprompted, or nobody sends a real invoice through it after two onboarding fixes: change the primary customer or stop.
 
 ## Budget
 Spend nothing until a free test shows signal. If you want a cap, keep 25% of it for a paid test only after the checkpoint.

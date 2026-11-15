@@ -815,15 +815,15 @@
     {
       "path": "argus/SKILL.md",
       "role": "instructions",
-      "bytes": 16446,
-      "sha256": "72dd9a3a9c00b3c566dcc94397bb47648bd25d3094dfaca881bccaa7553ef802",
+      "bytes": 18822,
+      "sha256": "0e8ee1a7c9c86ce628097e22d1d450814fbf43f3665d49585e54f487e215fb06",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/SKILL.md"
     },
     {
       "path": "argus/assets/quick-example.md",
       "role": "template",
-      "bytes": 2245,
-      "sha256": "1172fb430d4b19fffb68c0bd61044a38876a030976c20394b3a4699471b6ae6d",
+      "bytes": 2273,
+      "sha256": "2115443a1081e72bd153f320b75904bbec48747b21162411d435af63457b3840",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/assets/quick-example.md"
     },
     {
@@ -843,43 +843,43 @@
     {
       "path": "argus/examples/example-output.json",
       "role": "example",
-      "bytes": 9840,
-      "sha256": "c8d6393bf21427b2286066cbb8e6f41a97ae20d5cba0e3f987a0d570fc182ab7",
+      "bytes": 9892,
+      "sha256": "cea58b1ea66c96d601b49fbb1ba7a623c32e6182f957bac85d063b7a51e030c1",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-output.json"
     },
     {
       "path": "argus/examples/example-output.tr.json",
       "role": "example",
-      "bytes": 6544,
-      "sha256": "a5a598a8024d1b0bc10a25e783d1327791361f0423fbc6f82f26ede2a09e6fc8",
+      "bytes": 6587,
+      "sha256": "40507501f5231a9478e97d8b5c4c6f99f62c8ee6518f0a4fd350dadb5f99a1ac",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-output.tr.json"
     },
     {
       "path": "argus/examples/example-report.html",
       "role": "example",
-      "bytes": 20213,
-      "sha256": "9ada0a9b1459bad932e5ab2891067de9a0bf165727d6a01c953465695a9aca91",
+      "bytes": 20270,
+      "sha256": "00a57efad4e78f99c4381a756de9aabbc9405291a05f9480cd2091cc13bedea4",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-report.html"
     },
     {
       "path": "argus/examples/example-report.md",
       "role": "example",
-      "bytes": 8354,
-      "sha256": "f13d8c0b98bcd096a333bb30c467095dfe3b917d632b22b53dae326f1c6f6c59",
+      "bytes": 8411,
+      "sha256": "62cbe9131068e80f4c445148469a11fa5f850b67ec017aeed4626a0d8a0f2f59",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-report.md"
     },
     {
       "path": "argus/examples/example-report.tr.html",
       "role": "example",
-      "bytes": 16595,
-      "sha256": "041a63ec16b9c7975b939c474c12c52d4a2819ce11535de0f0f1fc98db2c737c",
+      "bytes": 16634,
+      "sha256": "1ba0a3e978e1a379aa073120ce3301d578f33e6157845b3e825a9d41dab6f767",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-report.tr.html"
     },
     {
       "path": "argus/examples/example-report.tr.md",
       "role": "example",
-      "bytes": 5896,
-      "sha256": "6a872282c6d206005def15d1a4da024857658108340116ff8cfa551765720f86",
+      "bytes": 5945,
+      "sha256": "1e0750003f2f912f2f8b23888ff4d38a61ee5c5c7fa0916417a33d2f29e36d50",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/examples/example-report.tr.md"
     },
     {
@@ -927,8 +927,8 @@
     {
       "path": "argus/scripts/render_report.py",
       "role": "script",
-      "bytes": 47916,
-      "sha256": "5a0d79f935d69b10a9091b8fcca57c774953da50152a34e0a42727ffe8f62f37",
+      "bytes": 47942,
+      "sha256": "f5bf1988407f507170205f235b31cd7fd9f6ebdb7bb94cade0b1735bf07b3268",
       "raw_url": "https://raw.githubusercontent.com/ardakaano/argus/main/argus/scripts/render_report.py"
     }
   ],
@@ -937,6 +937,6 @@
       "en": "SKILL.md body plus references and templates, for a chat widget backed by a model you provide. Not needed for platforms that load the skill natively.",
       "tr": "SKILL.md gövdesi, referanslar ve şablonlar; sağladığın bir modelle çalışan sohbet bileşeni için. Skill'i yerel yükleyen platformlarda gerekmez."
     },
-    "approx_tokens": 10440
+    "approx_tokens": 11041
   }
 }
